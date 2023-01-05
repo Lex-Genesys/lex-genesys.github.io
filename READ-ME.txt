@@ -1,0 +1,33 @@
+# Genesys Bot Flow Coffee Demo
+
+## Setup
+
+1. Import the appropriate files from the [files folder](https://github.com/mitchmason4/mitchmason4.github.io/tree/main/files) to create the inbound message flow, digital bot flow, and knowledge corpus.
+
+2. Create a GPE segment, in the demo we used URLs ending in /service.html and then /support.html
+
+3. Create an GPE Action Map named "Coffee Recall" (This name is referenced in the Digital Bot Flow, so if you change the name, change the flow accordingly) This action map should trigger messenger with a message about a recall like "It looks like one or more products you own are under recall!"
+
+4. Create a messenger configuration. Turn on auto-start, GPE, and support center. The color of messsenger should be #BE7400, and the color for support center header should be #361900, with background of #FFFBF2
+
+5. Update the messenger script on all pages. It can always be found at the very bottom (Note: In a future update we will create a .env file to update the script in a single location)
+
+## Credits
+
+  =>  Inbound flow.    : Terry Sullivan
+ 
+  =>  Digital Bot Flow : Mitch Mason
+  
+  ### Website Info:
+ 
+  =>  Template Name    : KOPPEE - Coffee Shop HTML Template
+
+  =>  Template Link    : https://htmlcodex.com/coffee-shop-html-template
+
+  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
+
+  =>  Template Author  : HTML Codex
+
+  =>  Author Website   : https://htmlcodex.com
+
+  =>  About HTML Codex : HTML Codex is one of the top creators and publishers of Free HTML templates, HTML landing pages, HTML email templates and HTML snippets in the world. Read more at ( https://htmlcodex.com/about-us )
