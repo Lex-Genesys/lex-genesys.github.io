@@ -86,7 +86,7 @@ const request = new Request("https://api.mypurecloud.de/api/v2/conversations/cal
     })
     fetch(request)
 .then((response) => {
-
+    console.log(request.json())
 }) 
 
     //PureCloud.notificationChannel.addNotificationCallback('button.callback.clicked', handleCallback);
