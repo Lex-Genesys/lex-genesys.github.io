@@ -68,3 +68,22 @@
     
 })(jQuery);
 
+var callbackButton = document.getElementById('buttonCallback');
+
+callbackButton.addEventListener('click', function() {
+    alert('Le bouton de rappel a été cliqué !');
+    axios.post(
+        `https://api.mypurecloud.de/api/v2/conversations/callbacks`, {
+            queueId: "636f560a-bc92-45e4-a8c3-79b53dd7f817",
+            callbackUserName: "Alvyn",
+            callbackNumbers:["0000"],
+        }, {
+            headers: {
+                "Authorization": `Bearer HsGsMX51Y1CpbF2LgaS_AYYa0uHIdN8lS8fOSqQxx13_M6mGxwtTkW56twC94ApPMKTCNE1GBwTccq3UUPYgqg`,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }
+    );
+    //PureCloud.notificationChannel.addNotificationCallback('button.callback.clicked', handleCallback);
+  });
