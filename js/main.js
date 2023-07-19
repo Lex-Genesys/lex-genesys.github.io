@@ -79,7 +79,7 @@ callbackButton.addEventListener('click', function() {
     var phone = document.getElementById('phone').value;
     var date = document.getElementById('date').value;
     var time = document.getElementById('time').value;
-    console.log(date,time)
+    console.log(date,time);
 
     alert('Le bouton de rappel a été cliqué !');
 
