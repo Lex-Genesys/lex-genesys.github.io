@@ -81,7 +81,7 @@ callbackButton.addEventListener('click', function() {
     alert('Le bouton de rappel a été cliqué !');
 
     var headers = {
-        "Authorization": " bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
+        "Authorization": "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
@@ -101,7 +101,7 @@ const request = new Request("https://api.mypurecloud.de/api/v2/conversations/cal
             "callbackNumbers": ["1234"],
          },
         headers: {
-            "Authorization": " bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
+            "Authorization": "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
