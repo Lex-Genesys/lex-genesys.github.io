@@ -80,6 +80,62 @@ callbackButton.addEventListener('click', function() {
     console.log(name,phone);
     alert('Le bouton de rappel a été cliqué !');
 
+// Création d'une instance de XMLHttpRequest
+var xhr = new XMLHttpRequest();
+
+ 
+
+// URL de la requête
+var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
+
+ 
+
+// Corps de la requête (converti en JSON)
+var requestBody = {
+  "queueId": "636f560a-bc92-45e4-a8c3-79b53dd7f817",
+  "callbackUserName": name,
+  "callbackNumbers": [phone]
+};
+var requestBodyJson = JSON.stringify(requestBody);
+
+ 
+
+// Ouvrir la requête avec la méthode "POST" et l'URL
+xhr.open("POST", url);
+
+ 
+
+// Définir les en-têtes appropriées
+xhr.setRequestHeader("Authorization", "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA"); // Indique que le corps est en JSON
+xhr.setRequestHeader("Content-Type", "application/json"); 
+xhr.setRequestHeader("Accept", "application/json"); 
+
+// Gérer l'événement de réponse
+xhr.onload = function () {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    // La requête a réussi, gérer la réponse ici si nécessaire
+    var response = JSON.parse(xhr.responseText);
+    console.log(response);
+  } else {
+    // La requête a échoué, gérer l'erreur ici si nécessaire
+    console.error("La requête a échoué avec le statut :", xhr.status);
+  }
+};
+
+ 
+
+// Gérer l'erreur de la requête
+xhr.onerror = function () {
+  console.error("Erreur de requête");
+};
+
+ 
+
+// Envoyer la requête avec le corps JSON
+xhr.send(requestBodyJson);
+
+
+/*
     var headers = {
         "Authorization": "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
         "Content-Type": "application/json",
@@ -100,15 +156,11 @@ const request = new Request("https://api.mypurecloud.de/api/v2/conversations/cal
             "callbackUserName": "Amira",
             "callbackNumbers": ["1234"],
          },
-        headers: {
-            "Authorization": "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
+        headers:headers
     })
     fetch(request)
 .then((response) => {
 }) 
-// ,
+// ,*/
     //PureCloud.notificationChannel.addNotificationCallback('button.callback.clicked', handleCallback);
   });
