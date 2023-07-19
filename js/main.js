@@ -69,14 +69,14 @@
 })(jQuery);
 
 var callbackButton = document.getElementById('buttonCallback');
-var name = document.getElementById('Name').value;
-var phone = document.getElementById('phone').value;
+
 
 
 
 
 callbackButton.addEventListener('click', function() {
-
+    var name = document.getElementById('Name').value;
+    var phone = document.getElementById('phone').value;
     console.log(name,phone);
     alert('Le bouton de rappel a été cliqué !');
     var headers = {
@@ -85,15 +85,22 @@ callbackButton.addEventListener('click', function() {
         "Accept": "application/json"
     }
 
+    var jsonBody = JSON.stringify(
+        {
+            "queueId":"636f560a-bc92-45e4-a8c3-79b53dd7f817",
+            "callBackUserName":name,
+            "callbackNumbers": [phone]
+        }
+    )
 const request = new Request("https://api.mypurecloud.de/api/v2/conversations/callbacks", {
         method: "POST",
-        body: '{"queueId" : "636f560a-bc92-45e4-a8c3-79b53dd7f817","callbackUserName" : name,"callbackNumbers" : [phone]}',
+        body: jsonBody,
         headers: headers
     })
     fetch(request)
 .then((response) => {
     console.log(request.json())
 }) 
-
+// body: '{"queueId" : "636f560a-bc92-45e4-a8c3-79b53dd7f817","callbackUserName" : name,"callbackNumbers" : [phone]}',
     //PureCloud.notificationChannel.addNotificationCallback('button.callback.clicked', handleCallback);
   });
