@@ -72,7 +72,7 @@ var callbackButton = document.getElementById('buttonCallback');
 
 var phoneValue = document.getElementById('phone');
 var nameValue = document.getElementById('Name');
-console.log(nameValue)
+console.log(nameValue);
 
 
 callbackButton.addEventListener('click', function() {
