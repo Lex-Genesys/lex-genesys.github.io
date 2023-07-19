@@ -103,7 +103,6 @@ const request = new Request("https://api.mypurecloud.de/api/v2/conversations/cal
     })
     fetch(request)
 .then((response) => {
-    console.log(request.json())
 }) 
 // body: '{"queueId" : "636f560a-bc92-45e4-a8c3-79b53dd7f817","callbackUserName" : name,"callbackNumbers" : [phone]}',
     //PureCloud.notificationChannel.addNotificationCallback('button.callback.clicked', handleCallback);
