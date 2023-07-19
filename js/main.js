@@ -70,8 +70,8 @@
 
 var callbackButton = document.getElementById('buttonCallback');
 
-var phoneValue = document.getElementById('phone').value;
-var nameValue = document.getElementById('Name').value;
+var phoneValue = document.getElementById('phone');
+var nameValue = document.getElementById('Name');
 console.log(nameValue)
 
 
