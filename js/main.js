@@ -87,13 +87,8 @@ callbackButton.addEventListener('click', function() {
 
 const request = new Request("https://api.mypurecloud.de/api/v2/conversations/callbacks", {
         method: "POST",
-        body:  {
-            "queueId" : "636f560a-bc92-45e4-a8c3-79b53dd7f817",
-            "callbackUserName" : name,
-            "callbackNumbers" : [phone]  
-        },
+        body: '{"queueId" : "636f560a-bc92-45e4-a8c3-79b53dd7f817","callbackUserName" : name,"callbackNumbers" : [phone]}',
         headers: headers
-
     })
     fetch(request)
 .then((response) => {
