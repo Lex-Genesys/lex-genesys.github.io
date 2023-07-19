@@ -98,9 +98,13 @@ const request = new Request("https://api.mypurecloud.de/api/v2/conversations/cal
         body: {
             "queueId": "636f560a-bc92-45e4-a8c3-79b53dd7f817",
             "callbackUserName": "Amira",
-            "callbackNumbers": ['1234'],
+            "callbackNumbers": ["1234"],
          },
-        headers: headers
+        headers: {
+            "Authorization": " bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
     })
     fetch(request)
 .then((response) => {
