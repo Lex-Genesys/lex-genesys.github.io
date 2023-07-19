@@ -72,12 +72,12 @@ var callbackButton = document.getElementById('buttonCallback');
 var name = document.getElementById('Name').value;
 var phone = document.getElementById('phone').value;
 
-console.log(name,phone);
+
 
 
 callbackButton.addEventListener('click', function() {
 
-
+    console.log(name,phone);
     alert('Le bouton de rappel a été cliqué !');
     var headers = {
         "Authorization": "bearer 0IzQeC7ngx7h_nxcxeNi4CtsBelsuMueIAw-jIoKdosiBCjBv76Wf9Dxr2Yr2RFzXR7yAmWQaNojQO7-CHsNjw",
