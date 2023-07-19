@@ -77,7 +77,9 @@ var callbackButton = document.getElementById('buttonCallback');
 callbackButton.addEventListener('click', function() {
     var name = document.getElementById('Name').value;
     var phone = document.getElementById('phone').value;
-    console.log(name,phone);
+    var date = document.getElementById('date').value;
+    var time = document.getElementById('time').value;
+
     alert('Le bouton de rappel a été cliqué !');
 
 // Création d'une instance de XMLHttpRequest
@@ -94,7 +96,9 @@ var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
 var requestBody = {
   "queueId": "636f560a-bc92-45e4-a8c3-79b53dd7f817",
   "callbackUserName": name,
-  "callbackNumbers": [phone]
+  "callbackNumbers": [phone],
+  "callbackScheduledTime": date 
+
 };
 var requestBodyJson = JSON.stringify(requestBody);
 
