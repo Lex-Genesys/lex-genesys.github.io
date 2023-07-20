@@ -316,9 +316,31 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="datetime-local" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Date" data-target="#date" id = "date12 "data-toggle="datetimepicker"/>
+                                        <input type="datetime-local" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Date" data-target="#date" id = "date12" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
+                                <script>
+                                    // Convert date string to the required format
+                                    function formatDateToDatetimeLocal(dateString) {
+                                      const date = new Date(dateString);
+                                      const year = date.getFullYear();
+                                      const month = String(date.getMonth() + 1).padStart(2, '0');
+                                      const day = String(date.getDate()).padStart(2, '0');
+                                      const hours = String(date.getHours()).padStart(2, '0');
+                                      const minutes = String(date.getMinutes()).padStart(2, '0');
+                                      return `${year}-${month}-${day}T${hours}:${minutes}`;
+                                    }
+                                    // Get the input element
+                                    const dateInput = document.getElementById("date12");
+
+                                    // Listen for changes in the input field
+                                    dateInput.addEventListener("change", function(event) {
+                                        const enteredDate = event.target.value;
+                                        const formattedDate = formatDateToDatetimeLocal(enteredDate);
+                                        dateInput.value = formattedDate;
+                                    });
+                                    
+                                  </script>
                                 <!--<div class="form-group">
                                     <div class="time" id="time" data-target-input="nearest">
                                         <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Time" data-target="#time" id="time" data-toggle="datetimepicker"/>

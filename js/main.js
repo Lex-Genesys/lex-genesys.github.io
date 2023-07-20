@@ -95,10 +95,6 @@ callbackButton.addEventListener('click', function(event) {
         "callbackNumbers": [phone]
     };
         
-   
-  
-
-
       
     var requestBodyJson = JSON.stringify(requestBody);
 
