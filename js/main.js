@@ -67,7 +67,8 @@ callbackButton.addEventListener('click', function(event) {
 
     var name = document.getElementById('Name').value;
     var phone = document.getElementById('phone').value;
-    var date = document.getElementById('date12');
+    const dateTime = document.getElementById("callbackDateTime").value;
+    console.log("Scheduled callback for: ", dateTime);
   
     alert('Le bouton de rappel a été cliqué !');
 
@@ -78,7 +79,8 @@ callbackButton.addEventListener('click', function(event) {
     var requestBody = {
         "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
         "callbackUserName": name,
-        "callbackNumbers": [phone]
+        "callbackNumbers": [phone],
+        "callbackScheduledTime": "dateTime"
     };
     var requestBodyJson = JSON.stringify(requestBody);
 
