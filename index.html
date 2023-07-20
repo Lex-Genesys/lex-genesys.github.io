@@ -489,6 +489,16 @@
     deploymentId: '552dfe02-0fb0-47a9-8ad0-411608e497f2'
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+  // Use jQuery in noConflict mode
+  var jq = $.noConflict();
+</script>
+<script>
+    $(document).ready(function() {
+      $('#date').datetimepicker();
+    });
+  </script>
 </body>
 
 </html>
