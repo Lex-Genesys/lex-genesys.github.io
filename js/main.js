@@ -32,15 +32,7 @@
         return false;
     });
     
-
-    // Date and time picker
-    $('.date').datetimepicker({
-        format: 'L'
-    });
-    $('.time').datetimepicker({
-        format: 'LT'
-    });
-
+    
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({

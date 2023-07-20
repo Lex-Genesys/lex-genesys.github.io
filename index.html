@@ -320,26 +320,12 @@
                                     </div>
                                 </div>
                                 <script>
-                                    // Convert date string to the required format
-                                    function formatDateToDatetimeLocal(dateString) {
-                                      const date = new Date(dateString);
-                                      const year = date.getFullYear();
-                                      const month = String(date.getMonth() + 1).padStart(2, '0');
-                                      const day = String(date.getDate()).padStart(2, '0');
-                                      const hours = String(date.getHours()).padStart(2, '0');
-                                      const minutes = String(date.getMinutes()).padStart(2, '0');
-                                      return `${year}-${month}-${day}T${hours}:${minutes}`;
-                                    }
-                                    // Get the input element
-                                    const dateInput = document.getElementById("date12");
-
-                                    // Listen for changes in the input field
-                                    dateInput.addEventListener("change", function(event) {
-                                        const enteredDate = event.target.value;
-                                        const formattedDate = formatDateToDatetimeLocal(enteredDate);
-                                        dateInput.value = formattedDate;
+                                    $(document).ready(function () {
+                                      // Initialize the datetimepicker with format option
+                                      $('#date12').datetimepicker({
+                                        format: 'YYYY-MM-DDTHH:mm' // Use the desired format
+                                      });
                                     });
-                                    
                                   </script>
                                 <!--<div class="form-group">
                                     <div class="time" id="time" data-target-input="nearest">
