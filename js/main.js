@@ -81,7 +81,9 @@ callbackButton.addEventListener('click', function(event) {
         "callbackUserName": name,
         "callbackNumbers": [phone],
         "callbackScheduledTime": dateTime,
-        "skillIds": [ee307d00-58ab-4a49-91bb-241a97705b48]
+        "routingData": {
+            "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+         },
     };
     var requestBodyJson = JSON.stringify(requestBody);
 
