@@ -63,6 +63,7 @@
 var callbackButton = document.getElementById('buttonCallback');
 
 callbackButton.addEventListener('click', function(event) {
+    event.preventDefault();
     var xhr = new XMLHttpRequest(); // Declare and initialize the xhr variable here
     var name = document.getElementById('Name').value;
     var phone = document.getElementById('phone').value;
