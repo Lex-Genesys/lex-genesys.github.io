@@ -63,11 +63,11 @@
 var callbackButton = document.getElementById('buttonCallback');
 
 callbackButton.addEventListener('click', function(event) {
-    event.preventDefault();
+    
     var xhr = new XMLHttpRequest(); // Declare and initialize the xhr variable here
     var name = document.getElementById('Name').value;
     var phone = document.getElementById('phone').value;
-    const dateTime = document.getElementById("callbackDateTime").value;
+    var dateTime = document.getElementById("callbackDateTime").value;
     console.log("Scheduled callback for: ", dateTime);
   
     alert('Le bouton de rappel a été cliqué !');
