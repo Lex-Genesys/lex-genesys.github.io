@@ -80,7 +80,7 @@ callbackButton.addEventListener('click', function(event) {
         "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
         "callbackUserName": name,
         "callbackNumbers": [phone],
-        "callbackScheduledTime": "dateTime"
+        "callbackScheduledTime": dateTime
     };
     var requestBodyJson = JSON.stringify(requestBody);
 
