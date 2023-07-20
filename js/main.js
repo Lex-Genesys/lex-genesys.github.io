@@ -83,36 +83,26 @@ callbackButton.addEventListener('click', function() {
     alert('Le bouton de rappel a été cliqué !');
 
 // Création d'une instance de XMLHttpRequest
-var xhr = new XMLHttpRequest();
-
- 
 
 // URL de la requête
 var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-
- 
 
 // Corps de la requête (converti en JSON)
 var requestBody = {
   "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
   "callbackUserName": name,
-  "callbackNumbers": [phone],
-  "callbackScheduledTime": date 
-
+  "callbackNumbers": [phone]
 };
 var requestBodyJson = JSON.stringify(requestBody);
-
- 
 
 // Ouvrir la requête avec la méthode "POST" et l'URL
 xhr.open("POST", url);
 
- 
-
 // Définir les en-têtes appropriées
-xhr.setRequestHeader("Authorization", "bearer r08njAcY7N_fiOxbcm2IJe4LDai3mGocbGJqb4b2yg6eJxjdX2ayeFIxVmZBQxatppe1EZuSeML6Q4KcOIf_tA"); // Indique que le corps est en JSON
+var authToken = "i49RmwvN-RCwdINzn99BR_-ad5fOJFH3HrypXqAsNv8PU_zeGMd8I8_QN1yIcNuO1nj5fKCjMeLP1qy18DZ85g"; 
+xhr.setRequestHeader("Authorization", "Bearer " + authToken);
 xhr.setRequestHeader("Content-Type", "application/json"); 
-xhr.setRequestHeader("Accept", "application/json"); 
+xhr.setRequestHeader("Accept", "application/json");
 
 // Gérer l'événement de réponse
 xhr.onload = function () {
@@ -126,17 +116,14 @@ xhr.onload = function () {
   }
 };
 
- 
-
 // Gérer l'erreur de la requête
 xhr.onerror = function () {
   console.error("Erreur de requête");
 };
 
- 
-
 // Envoyer la requête avec le corps JSON
 xhr.send(requestBodyJson);
+
 
 
 /*
