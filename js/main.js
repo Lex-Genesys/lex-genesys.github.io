@@ -68,9 +68,9 @@ callbackButton.addEventListener('click', function(event) {
     var name = document.getElementById('Name').value;
     var phone = document.getElementById('phone').value;
     var dateTime = document.getElementById('DateTime').value;
-    console.log("Scheduled callback for: ", dateTime);
+    //console.log("Scheduled callback for: ", dateTime);
   
-    alert('Le bouton de rappel a été cliqué !');
+    //alert('Le bouton de rappel a été cliqué !');
 
     // URL de la requête
     var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
