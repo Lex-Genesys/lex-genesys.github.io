@@ -85,49 +85,48 @@ callbackButton.addEventListener('click', function(event) {
       
         const utcDate = convertUTCPlus2ToUTC(utcPlus2Date);
         const utcDate1 = utcDate.toISOString(); // Use this as an input for the API
+        var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
+
+        // Corps de la requête (converti en JSON)
+        var requestBody = {
+            "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
+            "callbackUserName": name,
+            "callbackNumbers": [phone],
+            "callbackScheduledTime": utcDate1,
+            "routingData": {
+                "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+             },
+        };
+        var requestBodyJson = JSON.stringify(requestBody);
+    
+        // Ouvrir la requête avec la méthode "POST" et l'URL
+        xhr.open("POST", url);
+    
+        // Définir les en-têtes appropriées
+        var authToken = "7DwJq-47vnNpYVBZULZNuEFvW2rwr2RjsdPa6UZmVCHoWa8di6NNJdqVnAY1pOsOVoC3layo7nX5pf2sqAKL-Q";
+        xhr.setRequestHeader("Authorization", "Bearer " + authToken);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/json");
+    
+        // Gérer l'événement de réponse
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // La requête a réussi, gérer la réponse ici si nécessaire
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+            } else {
+                // La requête a échoué, gérer l'erreur ici si nécessaire
+                console.error("La requête a échoué avec le statut :", xhr.status);
+            }
+        };
+    
+        // Gérer l'erreur de la requête
+        xhr.onerror = function () {
+            console.error("Erreur de requête");
+        };
+    
+        // Envoyer la requête avec le corps JSON
+        xhr.send(requestBodyJson);
         
       }
-      
-    var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-
-    // Corps de la requête (converti en JSON)
-    var requestBody = {
-        "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
-        "callbackUserName": name,
-        "callbackNumbers": [phone],
-        "callbackScheduledTime": utcDate1,
-        "routingData": {
-            "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
-         },
-    };
-    var requestBodyJson = JSON.stringify(requestBody);
-
-    // Ouvrir la requête avec la méthode "POST" et l'URL
-    xhr.open("POST", url);
-
-    // Définir les en-têtes appropriées
-    var authToken = "7DwJq-47vnNpYVBZULZNuEFvW2rwr2RjsdPa6UZmVCHoWa8di6NNJdqVnAY1pOsOVoC3layo7nX5pf2sqAKL-Q";
-    xhr.setRequestHeader("Authorization", "Bearer " + authToken);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Accept", "application/json");
-
-    // Gérer l'événement de réponse
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            // La requête a réussi, gérer la réponse ici si nécessaire
-            var response = JSON.parse(xhr.responseText);
-            console.log(response);
-        } else {
-            // La requête a échoué, gérer l'erreur ici si nécessaire
-            console.error("La requête a échoué avec le statut :", xhr.status);
-        }
-    };
-
-    // Gérer l'erreur de la requête
-    xhr.onerror = function () {
-        console.error("Erreur de requête");
-    };
-
-    // Envoyer la requête avec le corps JSON
-    xhr.send(requestBodyJson);
 });
