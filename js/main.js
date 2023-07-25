@@ -64,7 +64,7 @@ var callbackButton = document.getElementById('buttonCallback');
 
 
 function convertUTCPlus2ToUTC(date) {
-    const utcTimestamp = date.getTime() - (2 * 3600000); // Subtract 2 hours for UTC+0
+    const utcTimestamp = date.getTime() - 3600000; 
     const utcDate = new Date(utcTimestamp);
     return utcDate;
   }
