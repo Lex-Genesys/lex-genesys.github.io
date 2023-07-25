@@ -90,8 +90,10 @@ function convertUTCPlus2ToUTC(date) {
       "callbackNumbers": [document.getElementById('phone').value],
       "callbackScheduledTime": utcDate1,
       "routingData": {
+        "priority": 0,
         "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
       },
+      "countryCode": "+33"
     };
     var requestBodyJson = JSON.stringify(requestBody);
     var authToken = "7DwJq-47vnNpYVBZULZNuEFvW2rwr2RjsdPa6UZmVCHoWa8di6NNJdqVnAY1pOsOVoC3layo7nX5pf2sqAKL-Q";
