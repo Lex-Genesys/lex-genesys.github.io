@@ -101,11 +101,11 @@ function convertUTCPlus2ToUTC(date) {
 
 function convertAndUseAPIInput(callback) {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
-    const dateTimeInput = document.getElementById("DateTime").value;
+    const dateTimeInputValue = document.getElementById("DateTime").value;
 
     if (rappelPlusTardRadio.checked) {
         // Convert date-time to UTC if "Rappel Plus Tard" is selected
-        const utcPlus2Date = new Date(dateTimeInput);
+        const utcPlus2Date = new Date(dateTimeInputValue);
         if (isNaN(utcPlus2Date)) {
             alert("Invalid date format. Please enter a valid date.");
             return;
@@ -191,6 +191,18 @@ function convertAndUseAPIInput(callback) {
     }
 }
 
+// Flag to check if the callback button has been clicked
+let isCallbackButtonClicked = false;
+
+// Function to check if the required fields are empty
+function areRequiredFieldsEmpty() {
+    const nameInput = document.getElementById('Name').value;
+    const phoneInput = document.getElementById('phone').value;
+    const dateTimeInput = document.getElementById('DateTime').value;
+
+    return nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '';
+}
+
 // Function to display an error message in a pop-up
 function showErrorPopup(message) {
     const errorPopup = document.createElement('div');
@@ -209,36 +221,6 @@ function showErrorPopup(message) {
 function showSuccessPopup(message) {
     alert(message);
 }
-
-// Function to validate the required fields and enable/disable the button accordingly
-function validateRequiredFields() {
-    const nameInput = document.getElementById('Name').value;
-    const phoneInput = document.getElementById('phone').value;
-    const dateTimeInput = document.getElementById('DateTime').value;
-
-    const isRappelPlusTardChecked = rappelPlusTardRadio.checked;
-
-    if ((isRappelPlusTardChecked && (nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '')) ||
-        (!isRappelPlusTardChecked && (nameInput.trim() === '' || phoneInput.trim() === ''))) {
-        // Disable the button if required fields are empty
-        callbackButton.disabled = true;
-    } else {
-        // Enable the button if all required fields are filled
-        callbackButton.disabled = false;
-    }
-}
-
-// Attach event listeners to required fields to re-validate when the input changes
-const nameInput = document.getElementById('Name');
-const phoneInput = document.getElementById('phone');
-const dateTimeInput = document.getElementById('DateTime');
-
-nameInput.addEventListener('input', validateRequiredFields);
-phoneInput.addEventListener('input', validateRequiredFields);
-dateTimeInput.addEventListener('input', validateRequiredFields);
-
-// Initial validation on page load
-validateRequiredFields();
 
 // Button click event
 callbackButton.addEventListener('click', function (event) {
