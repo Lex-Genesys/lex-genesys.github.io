@@ -61,21 +61,12 @@
 })(jQuery);
 
 var callbackButton = document.getElementById('buttonCallback');
+var dateTimeField = document.getElementById('dateTimeField');
 
 function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
-    const dateTimeField = document.getElementById('dateTimeField');
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
     validateRequiredFields();
-}
-
-function showCalendarOnFocus() {
-    const dateTimeInput = document.getElementById('DateTime');
-    dateTimeInput.click();
-}
-
-function handleInitialDateTimeField() {
-    handleDateTimeField();
 }
 
 function convertUTCPlus2ToUTC(date) {
@@ -173,9 +164,6 @@ function convertAndUseAPIInput(callback) {
     }
 }
 
-// Flag to check if the callback button has been clicked
-let isCallbackButtonClicked = false;
-
 // Function to check if the required fields are empty
 function areRequiredFieldsEmpty() {
     const nameInput = document.getElementById('Name').value;
@@ -198,16 +186,8 @@ callbackButton.addEventListener('click', function (event) {
     // Check if the required fields are empty
     if (areRequiredFieldsEmpty()) {
         // Show an error message
-        showErrorPopup("Please fill in all required fields.");
+        showErrorPopup("Veuillez remplir tous les champs obligatoires.");
     } else {
-        // Disable the input fields
-        document.getElementById('Name').disabled = true;
-        document.getElementById('phone').disabled = true;
-        document.getElementById('DateTime').disabled = true;
-
-        // Set the flag to true to indicate that the callback button has been clicked
-        isCallbackButtonClicked = true;
-
         // Call the function and pass a callback function to handle the API response
         convertAndUseAPIInput(function (response) {
             if (response) {
@@ -219,47 +199,24 @@ callbackButton.addEventListener('click', function (event) {
                 document.getElementById('phone').value = '';
                 document.getElementById('DateTime').value = '';
 
-                // Re-enable the input fields to allow editing
-                document.getElementById('Name').disabled = false;
-                document.getElementById('phone').disabled = false;
-                document.getElementById('DateTime').disabled = false;
-
-                // Reset the flag to false to allow clicking the button again
-                isCallbackButtonClicked = false;
-
                 // Display the success message in a pop-up
                 showSuccessPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
             } else {
                 console.log("API request failed.");
                 // Handle the API request failure here
-
-                // Re-enable the input fields to allow editing
-                document.getElementById('Name').disabled = false;
-                document.getElementById('phone').disabled = false;
-                document.getElementById('DateTime').disabled = false;
-
-                // Reset the flag to false to allow clicking the button again
-                isCallbackButtonClicked = false;
             }
+
+            // Re-enable the input fields to allow editing
+            document.getElementById('Name').disabled = false;
+            document.getElementById('phone').disabled = false;
+            document.getElementById('DateTime').disabled = false;
         });
     }
 });
 
-// Function to check if the required fields are empty
-
-
 // Function to display an error message in a pop-up
 function showErrorPopup(message) {
-    const errorPopup = document.createElement('div');
-    errorPopup.className = 'error-popup';
-    errorPopup.textContent = message;
-
-    const body = document.querySelector('body');
-    body.appendChild(errorPopup);
-
-    setTimeout(function () {
-        body.removeChild(errorPopup);
-    }, 3000); // Display the error message for 3 seconds
+    alert(message);
 }
 
 // Function to display a success message in a pop-up
