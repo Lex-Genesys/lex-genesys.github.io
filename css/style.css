@@ -84,9 +84,8 @@ p {
   margin-bottom: 1rem;
 }
 
-/* Add this style to make the calendar icon white */
-.calendar-icon {
-  color: #fff; /* Set the desired white color */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 abbr[title],
@@ -1930,7 +1929,9 @@ pre code {
 
 input[type="date"].form-control,
 input[type="time"].form-control,
-input[type="datetime-local"].form-control,
+input[type="datetime-local"].form-control::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Change the color of the icon */
+}
 input[type="month"].form-control {
   appearance: none;
 }
