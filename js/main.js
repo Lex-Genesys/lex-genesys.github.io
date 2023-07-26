@@ -73,6 +73,11 @@ const rappelImmediatRadio = document.getElementById('rappelImmediat');
 rappelPlusTardRadio.addEventListener('change', handleDateTimeField);
 rappelImmediatRadio.addEventListener('change', handleDateTimeField);
 
+function showCalendarOnClick() {
+    const dateTimeInput = document.getElementById('DateTime');
+    dateTimeInput.focus();
+}
+
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime(); 
     const utcDate = new Date(utcTimestamp);
