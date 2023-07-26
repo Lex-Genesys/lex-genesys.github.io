@@ -62,14 +62,20 @@
 
 var callbackButton = document.getElementById('buttonCallback');
 var dateTimeField = document.getElementById('dateTimeField');
+var rappelImmediatRadio = document.getElementById('rappelImmediat');
 var rappelPlusTardRadio = document.getElementById('rappelPlusTard');
 
-  // Add event listener only to the "Rappel plus tard" radio button
-  rappelPlusTardRadio.addEventListener('click', handleDateTimeField);
-
-  function handleDateTimeField() {
+function handleDateTimeField() {
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
-  }
+}
+
+rappelImmediatRadio.addEventListener('click', function () {
+    dateTimeField.style.display = 'none';
+});
+
+rappelPlusTardRadio.addEventListener('click', function () {
+    dateTimeField.style.display = 'block';
+});
 
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime();
