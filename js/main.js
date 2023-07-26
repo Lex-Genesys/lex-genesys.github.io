@@ -113,17 +113,17 @@ function convertAndUseAPIInput(callback) {
   
       // API call using the converted UTC date-time for "Rappel Plus Tard"
       const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+      const authToken = "Token";
       const requestBody = {
-        queueId: "9489e4b8-474b-48eb-88bc-0d4506579320",
-        callbackUserName: document.getElementById('Name').value,
-        callbackNumbers: [document.getElementById('phone').value],
-        callbackScheduledTime: utcDate1,
-        routingData: {
-          priority: 0,
-          skillIds: ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+        "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
+        "callbackUserName": document.getElementById('Name').value,
+        "callbackNumbers": [document.getElementById('phone').value],
+        "callbackScheduledTime": utcDate1,
+        "routingData": {
+          "priority": 0,
+          "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
         },
-        countryCode: "+33"
+        "countryCode": "+33"
       };
   
       fetch(url, {
@@ -152,16 +152,16 @@ function convertAndUseAPIInput(callback) {
     } else {
       // API call for "Rappel Immédiat" without date-time consideration
       const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+      const authToken = "Token";
       const requestBody = {
-        queueId: "9489e4b8-474b-48eb-88bc-0d4506579320",
-        callbackUserName: document.getElementById('Name').value,
-        callbackNumbers: [document.getElementById('phone').value],
-        routingData: {
-          priority: 0,
-          skillIds: ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+        "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
+        "callbackUserName": document.getElementById('Name').value,
+        "callbackNumbers": [document.getElementById('phone').value],
+        "routingData": {
+          "priority": 0,
+          "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
         },
-        countryCode: "+33"
+        "countryCode": "+33"
       };
   
       fetch(url, {
@@ -201,7 +201,8 @@ function convertAndUseAPIInput(callback) {
         // Handle the API request failure here
       }
     });
-  });  
+  });
+  
   // Button click event
   callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
