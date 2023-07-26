@@ -62,7 +62,16 @@
 
 var callbackButton = document.getElementById('buttonCallback');
 
+function handleDateTimeField() {
+    const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
+    const dateTimeField = document.getElementById('dateTimeField');
+    dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
+}
 
+const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
+const rappelImmediatRadio = document.getElementById('rappelImmediat');
+rappelPlusTardRadio.addEventListener('change', handleDateTimeField);
+rappelImmediatRadio.addEventListener('change', handleDateTimeField);
 
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime(); 
