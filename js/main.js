@@ -100,11 +100,6 @@ function convertUTCPlus2ToUTC(date) {
     const dateTimeInput = document.getElementById("DateTime").value;
     const utcPlus2Date = new Date(dateTimeInput);
   
-    if (isNaN(utcPlus2Date)) {
-      alert("Invalid date format. Please enter a valid date.");
-      return;
-    }
-  
     const utcDate = convertUTCPlus2ToUTC(utcPlus2Date);
     const utcDate1 = utcDate.toISOString();
   
