@@ -66,7 +66,6 @@ var dateTimeField = document.getElementById('dateTimeField');
 function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
-    validateRequiredFields();
 }
 
 function convertUTCPlus2ToUTC(date) {
@@ -173,11 +172,7 @@ function areRequiredFieldsEmpty() {
     return nameInput.trim() === '' || phoneInput.trim() === '' || (dateTimeField.style.display === 'block' && dateTimeInput.trim() === '');
 }
 
-// Function to validate required fields before enabling the callback button
-function validateRequiredFields() {
-    const callbackButton = document.getElementById('buttonCallback');
-    callbackButton.disabled = areRequiredFieldsEmpty();
-}
+
 
 // Button click event
 callbackButton.addEventListener('click', function (event) {
