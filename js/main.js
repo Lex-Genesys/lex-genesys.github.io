@@ -229,6 +229,9 @@ function validateRequiredFields() {
 }
 
 // Attach event listeners to required fields to re-validate when the input changes
+const nameInput = document.getElementById('Name');
+const phoneInput = document.getElementById('phone');
+const dateTimeInput = document.getElementById('DateTime');
 
 nameInput.addEventListener('input', validateRequiredFields);
 phoneInput.addEventListener('input', validateRequiredFields);
