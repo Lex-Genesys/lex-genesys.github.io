@@ -5475,7 +5475,7 @@ a.close.disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: black;
+  color: var(--dark) !important;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
