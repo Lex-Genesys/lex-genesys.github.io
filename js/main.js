@@ -66,32 +66,17 @@ function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
     const dateTimeField = document.getElementById('dateTimeField');
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
-
-    // Re-validate the required fields when the radio buttons are changed
     validateRequiredFields();
 }
 
-const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
-const rappelImmediatRadio = document.getElementById('rappelImmediat');
-rappelPlusTardRadio.addEventListener('change', handleDateTimeField);
-rappelImmediatRadio.addEventListener('change', handleDateTimeField);
-
 function showCalendarOnFocus() {
     const dateTimeInput = document.getElementById('DateTime');
-    dateTimeInput.click(); // Simulate a click event on the input to trigger the calendar
+    dateTimeInput.click();
 }
 
-// Attach event listener to the date-time input to trigger calendar display
-const dateTimeInput = document.getElementById('DateTime');
-dateTimeInput.addEventListener('focus', showCalendarOnFocus);
-
-// Function to handle the initial state of the date-time field on page load
 function handleInitialDateTimeField() {
-    handleDateTimeField(); // Call the function to set the initial state
+    handleDateTimeField();
 }
-
-// Attach event listener to the "DOMContentLoaded" event to handle initial state
-document.addEventListener('DOMContentLoaded', handleInitialDateTimeField);
 
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime();
@@ -101,11 +86,10 @@ function convertUTCPlus2ToUTC(date) {
 
 function convertAndUseAPIInput(callback) {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
-    const dateTimeInputValue = document.getElementById("DateTime").value;
+    const dateTimeInput = document.getElementById("DateTime").value;
 
     if (rappelPlusTardRadio.checked) {
-        // Convert date-time to UTC if "Rappel Plus Tard" is selected
-        const utcPlus2Date = new Date(dateTimeInputValue);
+        const utcPlus2Date = new Date(dateTimeInput);
         if (isNaN(utcPlus2Date)) {
             alert("Invalid date format. Please enter a valid date.");
             return;
@@ -114,7 +98,6 @@ function convertAndUseAPIInput(callback) {
         const utcDate = convertUTCPlus2ToUTC(utcPlus2Date);
         const utcDate1 = utcDate.toISOString();
 
-        // API call using the converted UTC date-time for "Rappel Plus Tard"
         var xhr = new XMLHttpRequest();
         var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
         var requestBody = {
@@ -138,21 +121,20 @@ function convertAndUseAPIInput(callback) {
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
                 var response = JSON.parse(xhr.responseText);
-                callback(response); // Call the callback function with the API response
+                callback(response);
             } else {
                 console.error("La requête a échoué avec le statut :", xhr.status);
-                callback(null); // Call the callback with null to indicate an error
+                callback(null);
             }
         };
 
         xhr.onerror = function () {
             console.error("Erreur de requête");
-            callback(null); // Call the callback with null to indicate an error
+            callback(null);
         };
 
         xhr.send(requestBodyJson);
     } else {
-        // API call for "Rappel Immédiat" without date-time consideration
         var xhr = new XMLHttpRequest();
         var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
         var requestBody = {
@@ -175,16 +157,16 @@ function convertAndUseAPIInput(callback) {
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
                 var response = JSON.parse(xhr.responseText);
-                callback(response); // Call the callback function with the API response
+                callback(response);
             } else {
                 console.error("La requête a échoué avec le statut :", xhr.status);
-                callback(null); // Call the callback with null to indicate an error
+                callback(null);
             }
         };
 
         xhr.onerror = function () {
             console.error("Erreur de requête");
-            callback(null); // Call the callback with null to indicate an error
+            callback(null);
         };
 
         xhr.send(requestBodyJson);
@@ -203,23 +185,10 @@ function areRequiredFieldsEmpty() {
     return nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '';
 }
 
-// Function to display an error message in a pop-up
-function showErrorPopup(message) {
-    const errorPopup = document.createElement('div');
-    errorPopup.className = 'error-popup';
-    errorPopup.textContent = message;
-
-    const body = document.querySelector('body');
-    body.appendChild(errorPopup);
-
-    setTimeout(function () {
-        body.removeChild(errorPopup);
-    }, 3000); // Display the error message for 3 seconds
-}
-
-// Function to display a success message in a pop-up
-function showSuccessPopup(message) {
-    alert(message);
+// Function to validate required fields before enabling the callback button
+function validateRequiredFields() {
+    const callbackButton = document.getElementById('buttonCallback');
+    callbackButton.disabled = areRequiredFieldsEmpty();
 }
 
 // Button click event
@@ -275,3 +244,22 @@ callbackButton.addEventListener('click', function (event) {
         });
     }
 });
+
+// Function to display an error message in a pop-up
+function showErrorPopup(message) {
+    const errorPopup = document.createElement('div');
+    errorPopup.className = 'error-popup';
+    errorPopup.textContent = message;
+
+    const body = document.querySelector('body');
+    body.appendChild(errorPopup);
+
+    setTimeout(function () {
+        body.removeChild(errorPopup);
+    }, 3000); // Display the error message for 3 seconds
+}
+
+// Function to display a success message in a pop-up
+function showSuccessPopup(message) {
+    alert(message);
+}
