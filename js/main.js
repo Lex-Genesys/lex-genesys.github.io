@@ -221,12 +221,16 @@ callbackButton.addEventListener('click', function (event) {
     }
 });
 
-// Function to display an error message in a pop-up
-function showErrorPopup(message) {
-    alert(message);
+ // Function to display an error message in a custom modal dialog
+ function showErrorPopup(message) {
+    $("#messageText").text(message);
+    $("#messageModalLabel").text("Erreur");
+    $("#messageModal").modal("show");
 }
 
-// Function to display a success message in a pop-up
+// Function to display a success message in a custom modal dialog
 function showSuccessPopup(message) {
-    alert(message);
+    $("#messageText").text(message);
+    $("#messageModalLabel").text("Succès");
+    $("#messageModal").modal("show");
 }
