@@ -190,9 +190,10 @@ function convertAndUseAPIInput(callback) {
     }
 }
 
-// Usage:
+// Button click event
 callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
+
     // Get the values of the name and phone input fields
     const nameInput = document.getElementById('Name').value;
     const phoneInput = document.getElementById('phone').value;
@@ -200,37 +201,43 @@ callbackButton.addEventListener('click', function (event) {
     // Check if the name and phone fields are not empty
     if (nameInput.trim() === '' || phoneInput.trim() === '') {
         // Show an error message
-        showErrorMessage("Please enter your name and phone number.");
+        showErrorPopup("Please enter your name and phone number.");
     } else {
         // Empty the input fields
         document.getElementById('Name').value = '';
         document.getElementById('phone').value = '';
-        document.getElementById('DateTime').value = '';  
+        document.getElementById('DateTime').value = '';
+
         // Call the function and pass a callback function to handle the API response
         convertAndUseAPIInput(function (response) {
             if (response) {
-                // Handle the successful API response here
                 console.log("API response:", response);
-            
+                // Handle the successful API response here
             } else {
-                // Handle the API request failure here
                 console.log("API request failed.");
+                // Handle the API request failure here
             }
-            showPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
+            // Display the success message in a pop-up
+            showSuccessPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
         });
     }
 });
 
-// Function to display a pop-up message
-function showPopup(message) {
-    const popup = document.createElement('div');
-    popup.className = 'popup';
-    popup.textContent = message;
+// Function to display an error message in a pop-up
+function showErrorPopup(message) {
+    const errorPopup = document.createElement('div');
+    errorPopup.className = 'error-popup';
+    errorPopup.textContent = message;
 
     const body = document.querySelector('body');
-    body.appendChild(popup);
+    body.appendChild(errorPopup);
 
     setTimeout(function () {
-        body.removeChild(popup);
-    }, 3000); // Display the pop-up for 3 seconds
+        body.removeChild(errorPopup);
+    }, 3000); // Display the error message for 3 seconds
+}
+
+// Function to display a success message in a pop-up
+function showSuccessPopup(message) {
+    alert(message);
 }
