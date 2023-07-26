@@ -1931,7 +1931,7 @@ pre code {
 
 .modal-container .modal-custom-body {
   background-color: #ffffcc;
-  color: #000;
+  color: #000 !important ;
 }
 
 .modal-container .modal-custom-footer {
@@ -5475,6 +5475,7 @@ a.close.disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
+  color: black;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
