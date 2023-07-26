@@ -1923,7 +1923,20 @@ pre code {
   background-color: #e9ecef;
   opacity: 1;
 }
+/* Scoped styles for the modal */
+.modal-container .modal-custom-header {
+  background-color: #ffcc00;
+  color: #000;
+}
 
+.modal-container .modal-custom-body {
+  background-color: #ffffcc;
+  color: #000;
+}
+
+.modal-container .modal-custom-footer {
+  background-color: #ffcc00;
+}
 input[type="date"].form-control,
 input[type="time"].form-control,
 input[type="datetime-local"].form-control,
