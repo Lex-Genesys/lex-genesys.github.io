@@ -1927,6 +1927,21 @@ pre code {
   opacity: 1;
 }
 
+/* Scoped styles for the modal */
+.modal-custom-header {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+.modal-custom-body {
+    background-color: #ffffcc;
+    color: #000;
+}
+
+.modal-custom-footer {
+    background-color: #ffcc00;
+}
+
 input[type="date"].form-control,
 input[type="time"].form-control,
 input[type="datetime-local"].form-control,
