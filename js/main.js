@@ -189,10 +189,6 @@ function convertAndUseAPIInput(callback) {
         xhr.send(requestBodyJson);
     }
 }
-
-// Get the callback button element
-const callbackButton = document.getElementById('buttonCallback');
-
 // Flag to check if the callback button has been clicked
 let isCallbackButtonClicked = false;
 
