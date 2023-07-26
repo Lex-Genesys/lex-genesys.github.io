@@ -78,6 +78,8 @@ function showCalendarOnClick() {
     dateTimeInput.focus();
 }
 
+
+
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime(); 
     const utcDate = new Date(utcTimestamp);
