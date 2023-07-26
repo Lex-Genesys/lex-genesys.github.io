@@ -123,7 +123,7 @@ function convertUTCPlus2ToUTC(date) {
       "countryCode": "+33"
     };
     var requestBodyJson = JSON.stringify(requestBody);
-    var authToken = "7DwJq-47vnNpYVBZULZNuEFvW2rwr2RjsdPa6UZmVCHoWa8di6NNJdqVnAY1pOsOVoC3layo7nX5pf2sqAKL-Q";
+    var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
     xhr.open("POST", url);
     xhr.setRequestHeader("Authorization", "Bearer " + authToken);
     xhr.setRequestHeader("Content-Type", "application/json");
