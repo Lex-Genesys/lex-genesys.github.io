@@ -84,6 +84,11 @@ p {
   margin-bottom: 1rem;
 }
 
+/* Add this style to make the calendar icon white */
+.calendar-icon {
+  color: #fff; /* Set the desired white color */
+}
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
