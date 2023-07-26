@@ -193,6 +193,11 @@ function convertAndUseAPIInput(callback) {
 // Usage:
 callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
+    // Empty the input fields
+    document.getElementById('Name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('DateTime').value = '';
+
     // Call the function and pass a callback function to handle the API response
     convertAndUseAPIInput(function (response) {
         if (response) {
