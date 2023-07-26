@@ -122,8 +122,7 @@ function convertAndUseAPIInput(callback) {
             "routingData": {
                 "priority": 0,
                 "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
-            },
-            "countryCode": "+33"
+            }
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
@@ -161,8 +160,7 @@ function convertAndUseAPIInput(callback) {
             "routingData": {
                 "priority": 0,
                 "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
-            },
-            "countryCode": "+33"
+            }
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
