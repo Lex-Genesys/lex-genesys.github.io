@@ -182,7 +182,7 @@ function areRequiredFieldsEmpty() {
     const phoneInput = document.getElementById('phone').value;
     const dateTimeInput = document.getElementById('DateTime').value;
 
-    return nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '';
+    return nameInput.trim() === '' || phoneInput.trim() === '' || (dateTimeField.style.display === 'block' && dateTimeInput.trim() === '');
 }
 
 // Function to validate required fields before enabling the callback button
@@ -244,6 +244,9 @@ callbackButton.addEventListener('click', function (event) {
         });
     }
 });
+
+// Function to check if the required fields are empty
+
 
 // Function to display an error message in a pop-up
 function showErrorPopup(message) {
