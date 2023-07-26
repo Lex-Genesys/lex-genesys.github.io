@@ -189,6 +189,8 @@ function convertAndUseAPIInput(callback) {
         xhr.send(requestBodyJson);
     }
 }
+
+
 // Flag to check if the callback button has been clicked
 let isCallbackButtonClicked = false;
 
@@ -223,13 +225,34 @@ callbackButton.addEventListener('click', function (event) {
             if (response) {
                 console.log("API response:", response);
                 // Handle the successful API response here
+
+                // Empty the fields after the successful API request
+                document.getElementById('Name').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('DateTime').value = '';
+
+                // Re-enable the input fields to allow editing
+                document.getElementById('Name').disabled = false;
+                document.getElementById('phone').disabled = false;
+                document.getElementById('DateTime').disabled = false;
+
+                // Reset the flag to false to allow clicking the button again
+                isCallbackButtonClicked = false;
+
+                // Display the success message in a pop-up
+                showSuccessPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
             } else {
                 console.log("API request failed.");
                 // Handle the API request failure here
-            }
 
-            // Display the success message in a pop-up
-            showSuccessPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
+                // Re-enable the input fields to allow editing
+                document.getElementById('Name').disabled = false;
+                document.getElementById('phone').disabled = false;
+                document.getElementById('DateTime').disabled = false;
+
+                // Reset the flag to false to allow clicking the button again
+                isCallbackButtonClicked = false;
+            }
         });
     }
 });
@@ -252,20 +275,3 @@ function showErrorPopup(message) {
 function showSuccessPopup(message) {
     alert(message);
 }
-
-// Event listener to re-enable the input fields if the user clicks on them
-const inputFields = document.querySelectorAll('input[type="text"], input[type="datetime-local"]');
-inputFields.forEach(function (inputField) {
-    inputField.addEventListener('click', function () {
-        // Check if the callback button has been clicked
-        if (isCallbackButtonClicked) {
-            // Re-enable the input fields to allow editing
-            document.getElementById('Name').disabled = false;
-            document.getElementById('phone').disabled = false;
-            document.getElementById('DateTime').disabled = false;
-
-            // Reset the flag to false to allow clicking the button again
-            isCallbackButtonClicked = false;
-        }
-    });
-});
