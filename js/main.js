@@ -66,6 +66,9 @@ function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
     const dateTimeField = document.getElementById('dateTimeField');
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
+
+    // Re-validate the required fields when the radio buttons are changed
+    validateRequiredFields();
 }
 
 const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
@@ -207,17 +210,35 @@ function showSuccessPopup(message) {
     alert(message);
 }
 
-// Flag to check if the callback button has been clicked
-let isCallbackButtonClicked = false;
-
-// Function to check if the required fields are empty
-function areRequiredFieldsEmpty() {
+// Function to validate the required fields and enable/disable the button accordingly
+function validateRequiredFields() {
     const nameInput = document.getElementById('Name').value;
     const phoneInput = document.getElementById('phone').value;
     const dateTimeInput = document.getElementById('DateTime').value;
 
-    return nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '';
+    const isRappelPlusTardChecked = rappelPlusTardRadio.checked;
+
+    if ((isRappelPlusTardChecked && (nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '')) ||
+        (!isRappelPlusTardChecked && (nameInput.trim() === '' || phoneInput.trim() === ''))) {
+        // Disable the button if required fields are empty
+        callbackButton.disabled = true;
+    } else {
+        // Enable the button if all required fields are filled
+        callbackButton.disabled = false;
+    }
 }
+
+// Attach event listeners to required fields to re-validate when the input changes
+const nameInput = document.getElementById('Name');
+const phoneInput = document.getElementById('phone');
+const dateTimeInput = document.getElementById('DateTime');
+
+nameInput.addEventListener('input', validateRequiredFields);
+phoneInput.addEventListener('input', validateRequiredFields);
+dateTimeInput.addEventListener('input', validateRequiredFields);
+
+// Initial validation on page load
+validateRequiredFields();
 
 // Button click event
 callbackButton.addEventListener('click', function (event) {
