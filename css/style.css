@@ -1931,9 +1931,10 @@ pre code {
 
 .modal-container .modal-custom-body {
   background-color: #ffffcc;
-  color: #000 !important ;
 }
-
+modal-container .modal-custom-body p{
+  color: black;
+}
 .modal-container .modal-custom-footer {
   background-color: #ffcc00;
 }
