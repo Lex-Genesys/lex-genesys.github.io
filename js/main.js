@@ -67,15 +67,18 @@ var rappelPlusTardRadio = document.getElementById('rappelPlusTard');
 
 function handleDateTimeField() {
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
-}
+  }
 
-rappelImmediatRadio.addEventListener('click', function () {
-    dateTimeField.style.display = 'none';
-});
+  rappelImmediatRadio.addEventListener('click', function () {
+    handleDateTimeField();
+  });
 
-rappelPlusTardRadio.addEventListener('click', function () {
-    dateTimeField.style.display = 'block';
-});
+  rappelPlusTardRadio.addEventListener('click', function () {
+    handleDateTimeField();
+  });
+
+  // Initially call handleDateTimeField() to set the correct display state
+  handleDateTimeField();
 
 function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime();
