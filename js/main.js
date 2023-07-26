@@ -77,7 +77,13 @@ function showCalendarOnClick() {
     const dateTimeInput = document.getElementById('DateTime');
     dateTimeInput.focus();
 }
+const dateTimeInput = document.getElementById('DateTime');
+dateTimeInput.addEventListener('click', showCalendarOnClick);
 
+// Function to handle the initial state of the date-time field on page load
+function handleInitialDateTimeField() {
+    handleDateTimeField(); // Call the function to set the initial state
+ }
 const dateTimeInput = document.getElementById('DateTime');
 dateTimeInput.addEventListener('click', showCalendarOnClick);
 
