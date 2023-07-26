@@ -63,6 +63,8 @@
 var callbackButton = document.getElementById('buttonCallback');
 var dateTimeField = document.getElementById('dateTimeField');
 
+dateTimeField.style.display = 'none';
+
 function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
     dateTimeField.style.display = rappelPlusTardRadio.checked ? 'block' : 'none';
