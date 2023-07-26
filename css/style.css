@@ -1929,13 +1929,14 @@ pre code {
 
 input[type="date"].form-control,
 input[type="time"].form-control,
-input[type="datetime-local"].form-control::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* Change the color of the icon */
-}
+input[type="datetime-local"].form-control,
 input[type="month"].form-control {
   appearance: none;
 }
 
+input[type="datetime-local"].form-group::-webkit-calendar-picker-indicator {
+  filter: invert(1); 
+}
 select.form-control:focus::-ms-value {
   color: #fff;
   background-color: #fff;
