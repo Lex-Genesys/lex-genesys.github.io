@@ -63,7 +63,9 @@
 var callbackButton = document.getElementById('buttonCallback');
 var dateTimeField = document.getElementById('dateTimeField');
 
-dateTimeField.style.display = 'none';
+// Add event listeners to the radio buttons
+document.getElementById('rappelImmediat').addEventListener('click', handleDateTimeField);
+document.getElementById('rappelPlusTard').addEventListener('click', handleDateTimeField);
 
 function handleDateTimeField() {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
