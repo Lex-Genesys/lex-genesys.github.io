@@ -1929,17 +1929,17 @@ pre code {
 
 /* Scoped styles for the modal */
 .modal-custom-header {
-    background-color: #ffcc00;
-    color: #000;
+    background-color: #ffcc00 !important;
+    color: #000 !important;
 }
 
 .modal-custom-body {
-    background-color: #ffffcc;
-    color: #000;
+    background-color: #ffffcc !important;
+    color: #000 !important;
 }
 
 .modal-custom-footer {
-    background-color: #ffcc00;
+    background-color: #ffcc00 !important;
 }
 
 input[type="date"].form-control,
