@@ -73,12 +73,14 @@ const rappelImmediatRadio = document.getElementById('rappelImmediat');
 rappelPlusTardRadio.addEventListener('change', handleDateTimeField);
 rappelImmediatRadio.addEventListener('change', handleDateTimeField);
 
-function showCalendarOnClick() {
+function showCalendarOnFocus() {
     const dateTimeInput = document.getElementById('DateTime');
-    dateTimeInput.focus();
+    dateTimeInput.click(); // Simulate a click event on the input to trigger the calendar
 }
+
+// Attach event listener to the date-time input to trigger calendar display
 const dateTimeInput = document.getElementById('DateTime');
-dateTimeInput.addEventListener('click', showCalendarOnClick);
+dateTimeInput.addEventListener('focus', showCalendarOnFocus);
 
 // Function to handle the initial state of the date-time field on page load
 function handleInitialDateTimeField() {
