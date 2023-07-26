@@ -84,9 +84,6 @@ p {
   margin-bottom: 1rem;
 }
 
-::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-}
 
 abbr[title],
 abbr[data-original-title] {
@@ -1925,21 +1922,6 @@ pre code {
 .form-control:disabled, .form-control[readonly] {
   background-color: #e9ecef;
   opacity: 1;
-}
-
-/* Scoped styles for the modal */
-.modal-custom-header {
-    background-color: #ffcc00 !important;
-    color: #000 !important;
-}
-
-.modal-custom-body {
-    background-color: #ffffcc !important;
-    color: #000 !important;
-}
-
-.modal-custom-footer {
-    background-color: #ffcc00 !important;
 }
 
 input[type="date"].form-control,
