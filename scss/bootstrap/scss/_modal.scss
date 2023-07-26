@@ -4,7 +4,9 @@
 // .modal           - container to scroll within
 // .modal-dialog    - positioning shell for the actual modal
 // .modal-content   - actual modal w/ bg and corners and stuff
-
+:root {
+  --text-color: black;
+}
 
 // Container that the modal scrolls within
 .modal {
@@ -98,7 +100,7 @@
   flex-direction: column;
   width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
   // counteract the pointer-events: none; in the .modal-dialog
-  color: black;
+  text-color: black;
   pointer-events: auto;
   background-color: var(--#{$prefix}modal-bg);
   background-clip: padding-box;
