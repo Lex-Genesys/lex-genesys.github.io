@@ -113,7 +113,7 @@ function convertAndUseAPIInput(callback) {
   
       // API call using the converted UTC date-time for "Rappel Plus Tard"
       const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "Token";
+      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
       const requestBody = {
         "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
         "callbackUserName": document.getElementById('Name').value,
@@ -152,7 +152,7 @@ function convertAndUseAPIInput(callback) {
     } else {
       // API call for "Rappel Immédiat" without date-time consideration
       const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "Token";
+      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
       const requestBody = {
         "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
         "callbackUserName": document.getElementById('Name').value,
