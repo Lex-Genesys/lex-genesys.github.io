@@ -85,139 +85,124 @@ dateTimeInput.addEventListener('focus', showCalendarOnFocus);
 // Function to handle the initial state of the date-time field on page load
 function handleInitialDateTimeField() {
     handleDateTimeField(); // Call the function to set the initial state
- }
+}
 
 // Attach event listener to the "DOMContentLoaded" event to handle initial state
 document.addEventListener('DOMContentLoaded', handleInitialDateTimeField);
 
 function convertUTCPlus2ToUTC(date) {
-    const utcTimestamp = date.getTime(); 
+    const utcTimestamp = date.getTime();
     const utcDate = new Date(utcTimestamp);
     return utcDate;
 }
-  
+
 function convertAndUseAPIInput(callback) {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
     const dateTimeInput = document.getElementById("DateTime").value;
-  
+
     if (rappelPlusTardRadio.checked) {
-      // Convert date-time to UTC if "Rappel Plus Tard" is selected
-      const utcPlus2Date = new Date(dateTimeInput);
-      if (isNaN(utcPlus2Date)) {
-        alert("Invalid date format. Please enter a valid date.");
-        return;
-      }
-  
-      const utcDate = convertUTCPlus2ToUTC(utcPlus2Date);
-      const utcDate1 = utcDate.toISOString();
-  
-      // API call using the converted UTC date-time for "Rappel Plus Tard"
-      const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
-      const requestBody = {
-        "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
-        "callbackUserName": document.getElementById('Name').value,
-        "callbackNumbers": [document.getElementById('phone').value],
-        "callbackScheduledTime": utcDate1,
-        "routingData": {
-          "priority": 0,
-          "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
-        },
-        "countryCode": "+33"
-      };
-  
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + authToken,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        // Convert date-time to UTC if "Rappel Plus Tard" is selected
+        const utcPlus2Date = new Date(dateTimeInput);
+        if (isNaN(utcPlus2Date)) {
+            alert("Invalid date format. Please enter a valid date.");
+            return;
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log("API response:", data);
-        callback(data); // Call the callback function with the API response
-      })
-      .catch(error => {
-        console.error("Error:", error.message);
-        callback(null); // Call the callback with null to indicate an error
-      });
+
+        const utcDate = convertUTCPlus2ToUTC(utcPlus2Date);
+        const utcDate1 = utcDate.toISOString();
+
+        // API call using the converted UTC date-time for "Rappel Plus Tard"
+        var xhr = new XMLHttpRequest();
+        var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
+        var requestBody = {
+            "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
+            "callbackUserName": document.getElementById('Name').value,
+            "callbackNumbers": [document.getElementById('phone').value],
+            "callbackScheduledTime": utcDate1,
+            "routingData": {
+                "priority": 0,
+                "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+            },
+            "countryCode": "+33"
+        };
+
+        var requestBodyJson = JSON.stringify(requestBody);
+        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Authorization", "Bearer " + authToken);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                var response = JSON.parse(xhr.responseText);
+                callback(response); // Call the callback function with the API response
+            } else {
+                console.error("La requête a échoué avec le statut :", xhr.status);
+                callback(null); // Call the callback with null to indicate an error
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error("Erreur de requête");
+            callback(null); // Call the callback with null to indicate an error
+        };
+
+        xhr.send(requestBodyJson);
     } else {
-      // API call for "Rappel Immédiat" without date-time consideration
-      const url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
-      const authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
-      const requestBody = {
-        "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
-        "callbackUserName": document.getElementById('Name').value,
-        "callbackNumbers": [document.getElementById('phone').value],
-        "routingData": {
-          "priority": 0,
-          "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
-        },
-        "countryCode": "+33"
-      };
-  
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + authToken,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("API response:", data);
-        callback(data); // Call the callback function with the API response
-      })
-      .catch(error => {
-        console.error("Error:", error.message);
-        callback(null); // Call the callback with null to indicate an error
-      });
+        // API call for "Rappel Immédiat" without date-time consideration
+        var xhr = new XMLHttpRequest();
+        var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
+        var requestBody = {
+            "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
+            "callbackUserName": document.getElementById('Name').value,
+            "callbackNumbers": [document.getElementById('phone').value],
+            "routingData": {
+                "priority": 0,
+                "skillIds": ["ee307d00-58ab-4a49-91bb-241a97705b48"]
+            },
+            "countryCode": "+33"
+        };
+
+        var requestBodyJson = JSON.stringify(requestBody);
+        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ"; 
+
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Authorization", "Bearer " + authToken);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                var response = JSON.parse(xhr.responseText);
+                callback(response); // Call the callback function with the API response
+            } else {
+                console.error("La requête a échoué avec le statut :", xhr.status);
+                callback(null); // Call the callback with null to indicate an error
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error("Erreur de requête");
+            callback(null); // Call the callback with null to indicate an error
+        };
+
+        xhr.send(requestBodyJson);
     }
-  }
-  
-  // Usage:
-  callbackButton.addEventListener('click', function (event) {
+}
+
+// Usage:
+callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
     // Call the function and pass a callback function to handle the API response
     convertAndUseAPIInput(function (response) {
-      if (response) {
-        // Handle the successful API response here
-      } else {
-        // Handle the API request failure here
-      }
+        if (response) {
+            // Handle the successful API response here
+            console.log("API response:", response);
+        } else {
+            // Handle the API request failure here
+            console.log("API request failed.");
+        }
     });
-  });
-  
-  // Button click event
-  callbackButton.addEventListener('click', function (event) {
-    event.preventDefault();
-  
-    // Call the function and pass a callback function to handle the API response
-    convertAndUseAPIInput(function (response) {
-      if (response) {
-        console.log("API response:", response);
-        // Handle the successful API response here
-      } else {
-        console.log("API request failed.");
-        // Handle the API request failure here
-      }
-    });
-  });
-  
- 
- 
+});
