@@ -127,7 +127,6 @@ function convertAndUseAPIInput(callback) {
 
         var requestBodyJson = JSON.stringify(requestBody);
         var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
-
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -164,8 +163,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ"; 
-
+        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -190,6 +188,24 @@ function convertAndUseAPIInput(callback) {
     }
 }
 
+// Function to display an error message in a pop-up
+function showErrorPopup(message) {
+    const errorPopup = document.createElement('div');
+    errorPopup.className = 'error-popup';
+    errorPopup.textContent = message;
+
+    const body = document.querySelector('body');
+    body.appendChild(errorPopup);
+
+    setTimeout(function () {
+        body.removeChild(errorPopup);
+    }, 3000); // Display the error message for 3 seconds
+}
+
+// Function to display a success message in a pop-up
+function showSuccessPopup(message) {
+    alert(message);
+}
 
 // Flag to check if the callback button has been clicked
 let isCallbackButtonClicked = false;
@@ -256,22 +272,3 @@ callbackButton.addEventListener('click', function (event) {
         });
     }
 });
-
-// Function to display an error message in a pop-up
-function showErrorPopup(message) {
-    const errorPopup = document.createElement('div');
-    errorPopup.className = 'error-popup';
-    errorPopup.textContent = message;
-
-    const body = document.querySelector('body');
-    body.appendChild(errorPopup);
-
-    setTimeout(function () {
-        body.removeChild(errorPopup);
-    }, 3000); // Display the error message for 3 seconds
-}
-
-// Function to display a success message in a pop-up
-function showSuccessPopup(message) {
-    alert(message);
-}
