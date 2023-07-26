@@ -94,7 +94,7 @@ function convertUTCPlus2ToUTC(date) {
     const utcTimestamp = date.getTime(); 
     const utcDate = new Date(utcTimestamp);
     return utcDate;
-  }
+}
   
   function convertAndUseAPIInput(callback) {
     const rappelPlusTardRadio = document.getElementById('rappelPlusTard');
@@ -126,7 +126,7 @@ function convertUTCPlus2ToUTC(date) {
             "countryCode": "+33"
         };
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+        var authToken = "mmlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -186,8 +186,7 @@ function convertUTCPlus2ToUTC(date) {
 
         xhr.send(requestBodyJson);
     }
-}
-
+    }   
   // Button click event
   callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
