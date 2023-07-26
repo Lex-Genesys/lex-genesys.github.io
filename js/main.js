@@ -193,11 +193,6 @@ function convertAndUseAPIInput(callback) {
 // Usage:
 callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
-    // Empty the input fields
-    document.getElementById('Name').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('DateTime').value = '';
-
     // Call the function and pass a callback function to handle the API response
     convertAndUseAPIInput(function (response) {
         if (response) {
@@ -207,5 +202,23 @@ callbackButton.addEventListener('click', function (event) {
             // Handle the API request failure here
             console.log("API request failed.");
         }
+        showPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
     });
+    document.getElementById('Name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('DateTime').value = '';
 });
+
+// Function to display a pop-up message
+function showPopup(message) {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.textContent = message;
+
+    const body = document.querySelector('body');
+    body.appendChild(popup);
+
+    setTimeout(function () {
+        body.removeChild(popup);
+    }, 3000); // Display the pop-up for 3 seconds
+}
