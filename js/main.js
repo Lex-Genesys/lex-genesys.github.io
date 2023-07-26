@@ -190,23 +190,37 @@ function convertAndUseAPIInput(callback) {
     }
 }
 
+// Get the callback button element
+const callbackButton = document.getElementById('buttonCallback');
+
+// Flag to check if the callback button has been clicked
+let isCallbackButtonClicked = false;
+
+// Function to check if the required fields are empty
+function areRequiredFieldsEmpty() {
+    const nameInput = document.getElementById('Name').value;
+    const phoneInput = document.getElementById('phone').value;
+    const dateTimeInput = document.getElementById('DateTime').value;
+
+    return nameInput.trim() === '' || phoneInput.trim() === '' || dateTimeInput.trim() === '';
+}
+
 // Button click event
 callbackButton.addEventListener('click', function (event) {
     event.preventDefault();
 
-    // Get the values of the name and phone input fields
-    const nameInput = document.getElementById('Name').value;
-    const phoneInput = document.getElementById('phone').value;
-    
-    // Check if the name and phone fields are not empty
-    if (nameInput.trim() === '' || phoneInput.trim() === '') {
+    // Check if the required fields are empty
+    if (areRequiredFieldsEmpty()) {
         // Show an error message
-        showErrorPopup("Please enter your name and phone number.");
+        showErrorPopup("Please fill in all required fields.");
     } else {
-        // Empty the input fields
-        document.getElementById('Name').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('DateTime').value = '';
+        // Disable the input fields
+        document.getElementById('Name').disabled = true;
+        document.getElementById('phone').disabled = true;
+        document.getElementById('DateTime').disabled = true;
+
+        // Set the flag to true to indicate that the callback button has been clicked
+        isCallbackButtonClicked = true;
 
         // Call the function and pass a callback function to handle the API response
         convertAndUseAPIInput(function (response) {
@@ -217,6 +231,7 @@ callbackButton.addEventListener('click', function (event) {
                 console.log("API request failed.");
                 // Handle the API request failure here
             }
+
             // Display the success message in a pop-up
             showSuccessPopup("Merci pour votre demande, un conseiller va vous appeler dans le meilleur des délais");
         });
@@ -241,3 +256,20 @@ function showErrorPopup(message) {
 function showSuccessPopup(message) {
     alert(message);
 }
+
+// Event listener to re-enable the input fields if the user clicks on them
+const inputFields = document.querySelectorAll('input[type="text"], input[type="datetime-local"]');
+inputFields.forEach(function (inputField) {
+    inputField.addEventListener('click', function () {
+        // Check if the callback button has been clicked
+        if (isCallbackButtonClicked) {
+            // Re-enable the input fields to allow editing
+            document.getElementById('Name').disabled = false;
+            document.getElementById('phone').disabled = false;
+            document.getElementById('DateTime').disabled = false;
+
+            // Reset the flag to false to allow clicking the button again
+            isCallbackButtonClicked = false;
+        }
+    });
+});
