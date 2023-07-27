@@ -57,23 +57,24 @@
             }
         }
     });
-    $('#DateTimePicker').datetimepicker({
-        format: 'YYYY-MM-DDTHH:mm',
-        icons: {
-            time: 'fa fa-clock',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-crosshairs',
-            clear: 'fa fa-trash',
-            close: 'fa fa-times'
-        },
-        sideBySide: true,
-        // Additional options and settings can be added here
+    $(document).ready(function () {
+        $('#DateTimePicker').datetimepicker({
+            icons: {
+                time: 'fa fa-clock',
+                date: 'fa fa-calendar',
+                up: 'fa fa-chevron-up',
+                down: 'fa fa-chevron-down',
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-crosshairs',
+                clear: 'fa fa-trash',
+                close: 'fa fa-times'
+            },
+            useCurrent: false, // Do not use the current date/time as the default
+            format: 'YYYY-MM-DD HH:mm', // Format for both date and time
+            // Additional options and settings can be added here
+        });
     });
- 
 })(jQuery);
 
 
