@@ -57,26 +57,16 @@
             }
         }
     });
-    $(document).ready(function () {
-        $('#DateTimePicker').datetimepicker({
-            icons: {
-                time: 'fa fa-clock',
-                date: 'fa fa-calendar',
-                up: 'fa fa-chevron-up',
-                down: 'fa fa-chevron-down',
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-crosshairs',
-                clear: 'fa fa-trash',
-                close: 'fa fa-times'
-            },
-            useCurrent: false, // Do not use the current date/time as the default
-            format: 'YYYY-MM-DD HH:mm', // Format for both date and time
-            // Additional options and settings can be added here
-        });
-    });
 })(jQuery);
 
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr('#DateTime', {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        time_24hr: true,
+        // Additional options and settings can be added here
+    });
+});
 
 var callbackButton = document.getElementById('buttonCallback');
 var dateTimeField = document.getElementById('dateTimeField');
