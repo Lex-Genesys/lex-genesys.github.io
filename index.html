@@ -23,6 +23,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -339,12 +340,12 @@
                                 <div class="form-group" id="dateTimeField">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            <span class="input-group-text" id="calendarIcon"><i class="fas fa-calendar"></i></span>
                                         </div>
                                         <input type="text" class="form-control bg-transparent border-primary p-4" id="DateTime" placeholder="Date et l'heure du Rappel" required="required" />
                                     </div>
                                     <small class="form-text text-muted">Précisez le jour et l'heure qui vous arrangent</small>
-                                </div>                                            
+                                </div>                                 
                                 <div>
                                     <button class="btn btn-primary btn-block font-weight-bold py-3" type="button" id="buttonCallback">Demande de Rappel</button>
                                 </div>
