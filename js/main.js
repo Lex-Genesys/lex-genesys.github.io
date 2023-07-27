@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         enableTime: true,
         dateFormat: 'Y-m-d H:i',
         time_24hr: true,
+        local: 'fr'
         // Additional options and settings can be added here
     });
 });
@@ -208,7 +209,7 @@ callbackButton.addEventListener('click', function (event) {
     // Check if the required fields are empty
     if (areRequiredFieldsEmpty()) {
         // Show an error message
-        showErrorPopup("Veuillez remplir tous les champs obligatoires.");
+        showErrorPopup("Veuillez saisir votre Nom, prénom et votre numero de téléphone");
     } else {
         // Call the function and pass a callback function to handle the API response
         convertAndUseAPIInput(function (response) {
@@ -246,6 +247,6 @@ callbackButton.addEventListener('click', function (event) {
 // Function to display a success message in a custom modal dialog
 function showSuccessPopup(message) {
     $("#messageText").text(message);
-    $("#messageModalLabel").text("Succès");
+    $("#messageModalLabel").text("Validation de Rappel");
     $("#messageModal").modal("show");
 }
