@@ -60,6 +60,13 @@
 })(jQuery);
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Add a click event listener to the calendar icon
+    document.getElementById('calendarIcon').addEventListener('click', function () {
+        // Trigger the date and time picker to open
+        document.getElementById('DateTime').flatpickr.open();
+    });
+
+    // Initialize the Flatpickr date and time picker
     flatpickr('#DateTime', {
         enableTime: true,
         dateFormat: 'Y-m-d H:i',
