@@ -57,8 +57,25 @@
             }
         }
     });
-    
+    $('#DateTimePicker').datetimepicker({
+        format: 'YYYY-MM-DDTHH:mm',
+        icons: {
+            time: 'fa fa-clock',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-crosshairs',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        },
+        sideBySide: true,
+        // Additional options and settings can be added here
+    });
+ 
 })(jQuery);
+
 
 var callbackButton = document.getElementById('buttonCallback');
 var dateTimeField = document.getElementById('dateTimeField');
