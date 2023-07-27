@@ -122,7 +122,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+        var authToken = "rflUkYg_b0xD_2bYRu_rOy4-NkVB3M7O8NdUNE5ExHT1v--HwqjnRlXZFxJpun8D2PzXB2b-wZcHQBJQZJqOXg";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -158,7 +158,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "mlxaj2ObYULZCKPazsfmgjCtSLsXpxIBkdKD8iz_ppknDOJLoyuUdz3BPu2Ofprg8t8SG8v150VJdHJ1pEvFNQ";
+        var authToken = "rflUkYg_b0xD_2bYRu_rOy4-NkVB3M7O8NdUNE5ExHT1v--HwqjnRlXZFxJpun8D2PzXB2b-wZcHQBJQZJqOXg";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
