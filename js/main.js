@@ -211,7 +211,7 @@ callbackButton.addEventListener('click', function (event) {
     // Check if the required fields are empty
     if (areRequiredFieldsEmpty()) {
         // Show an error message
-        showErrorPopup("Veuillez saisir votre Nom, prénom et votre numero de téléphone");
+        showErrorPopup("Veuillez saisir votre nom, prénom et votre numéro de téléphone");
     } else {
         // Call the function and pass a callback function to handle the API response
         convertAndUseAPIInput(function (response) {
