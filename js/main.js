@@ -130,7 +130,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "rflUkYg_b0xD_2bYRu_rOy4-NkVB3M7O8NdUNE5ExHT1v--HwqjnRlXZFxJpun8D2PzXB2b-wZcHQBJQZJqOXg";
+        var authToken = "s_x6qhQRnRQDdUBYASHzy-Ct-kS-uDXrkSEn1ukSiLpHE0AB-b9NW1uhVxL_J1bjAt40S_zH1OxKMGTpVpvJQQ";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -166,7 +166,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "rflUkYg_b0xD_2bYRu_rOy4-NkVB3M7O8NdUNE5ExHT1v--HwqjnRlXZFxJpun8D2PzXB2b-wZcHQBJQZJqOXg";
+        var authToken = "s_x6qhQRnRQDdUBYASHzy-Ct-kS-uDXrkSEn1ukSiLpHE0AB-b9NW1uhVxL_J1bjAt40S_zH1OxKMGTpVpvJQQ";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
