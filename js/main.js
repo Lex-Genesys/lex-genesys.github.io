@@ -131,7 +131,7 @@ function convertAndUseAPIInput(callback) {
         };
 
         var requestBodyJson = JSON.stringify(requestBody);
-        var authToken = "s_x6qhQRnRQDdUBYASHzy-Ct-kS-uDXrkSEn1ukSiLpHE0AB-b9NW1uhVxL_J1bjAt40S_zH1OxKMGTpVpvJQQ";
+        var authToken = "";
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + authToken);
         xhr.setRequestHeader("Content-Type", "application/json");
