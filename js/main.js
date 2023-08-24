@@ -158,7 +158,8 @@ function convertAndUseAPIInput(callback) {
         var url = "https://api.mypurecloud.de/api/v2/conversations/callbacks";
         var requestBody = {
             "data": {
-                "Notes": "Préparation"
+                "Notes": "Préparation",
+                "Test": "Notes2"
               },
             "scriptId": "9ec361a2-e183-4431-91a3-15b592208996",
             "queueId": "9489e4b8-474b-48eb-88bc-0d4506579320",
