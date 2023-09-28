@@ -205,9 +205,10 @@
       });
     </script>
     <script type="text/javascript" charset="utf-8">
-        Genesys("subscribe", "Launcher.ready" , function(o){
+        Genesys("subscribe", "Messenger.ready" , function(o){
             console.log("The queue works!");
-            setTimeout(openchat, 5000);
+            Genesys("command", "Launcher.show");
+            //setTimeout(openchat, 5000);
         });
     </script>
   <!--    <script type="text/javascript" charset="utf-8">
