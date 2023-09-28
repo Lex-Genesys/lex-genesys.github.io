@@ -198,6 +198,12 @@
         debug: true // optional - Enables Genesys browser console logging
       });
     </script>
+    <script type="text/javascript" charset="utf-8">
+        Genesys("subscribe", "Launcher.ready" , function(o){
+            console.log("The queue works!");
+            Genesys("command", "Launcher.show");
+        });
+    </script>
   <!--    <script type="text/javascript" charset="utf-8">
           Genesys("subscribe", "Launcher.ready" , function(o){
             Genesys("command", "Launcher.show");
