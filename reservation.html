@@ -182,12 +182,12 @@
         </div>
     </div>
     <!-- Footer End -->
-   <!--  <script type="text/javascript" charset="utf-8">
+   <script type="text/javascript" charset="utf-8">
         function openchat() {
             Genesys("command", "Launcher.show");
-            console.log("Ma super function!!");
+            console.log("Ma super function apres timer 2s!!");
         }
-    </script>-->
+    </script>
     <!-- Import Web chat Genesys-->
     <script type="text/javascript" charset="utf-8">
       (function (g, e, n, es, ys) {
@@ -205,10 +205,9 @@
       });
     </script>
     <script type="text/javascript" charset="utf-8">
-        Genesys("subscribe", "Messenger.ready" , function(o){
+        Genesys("subscribe", "Launcher.ready" , function(o){
             console.log("The queue works!");
-            Genesys("command", "Launcher.show");
-             <!-- //setTimeout(openchat, 5000);-->
+            setTimeout(openchat, 2000);
         });
     </script>
   <!--    <script type="text/javascript" charset="utf-8">
