@@ -182,6 +182,12 @@
         </div>
     </div>
     <!-- Footer End -->
+    <script type="text/javascript" charset="utf-8">
+        function openchat() {
+            Genesys("command", "Launcher.show");
+            console.log("Ma super function!!");
+        }
+    </script>
     <!-- Import Web chat Genesys-->
     <script type="text/javascript" charset="utf-8">
       (function (g, e, n, es, ys) {
@@ -201,7 +207,7 @@
     <script type="text/javascript" charset="utf-8">
         Genesys("subscribe", "Launcher.ready" , function(o){
             console.log("The queue works!");
-            Genesys("command", "Launcher.show");
+            openchat();
         });
     </script>
   <!--    <script type="text/javascript" charset="utf-8">
@@ -209,6 +215,8 @@
             Genesys("command", "Launcher.show");
           });
        </script> -->
+
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
