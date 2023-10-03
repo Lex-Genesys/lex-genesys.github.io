@@ -211,15 +211,6 @@ Genesys("subscribe", "Launcher.ready" , function(o){
             Genesys("command", "Launcher.show")
             setTimeout('Genesys("command", "Launcher.show");', 1000);
 });
-        
-Genesys("subscribe","Messenger.ready",function(){
-        console.log("Avant la commande Opened");
-        Genesys("subscibe","Messenger.opened",function(){ datalayer.push({
-            "event":"Messenger.opened"
-            });
-        }); 
-        console.log("Après la commande Opened");
- });
     </script>
     
   <!--    <script type="text/javascript" charset="utf-8">
