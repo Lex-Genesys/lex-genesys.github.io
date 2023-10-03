@@ -205,17 +205,19 @@
     </script>
     <script type="text/javascript" charset="utf-8">
 
-          Genesys("subscribe","Messenger.ready",function(){
-              Genesys("subscibe","Messenger.oponed",function(){ datalayer.push({
-              });
-            }); 
-                      Genesys("subscribe", "Launcher.ready" , function(o){
-                        console.log("The queue works!");
-                        Genesys("command", "Launcher.show")
-            //setTimeout('Genesys("command", "Launcher.show");', 1000);
+Genesys("subscribe","Messenger.ready",function(){
+        Genesys("subscibe","Messenger.opened",function(){ datalayer.push({
+            "event":"Messenger.opened"
             });
-          });
+        }); 
+        Genesys("subscribe", "Launcher.ready" , function(o){
+            console.log("The queue works!");
+            Genesys("command", "Launcher.show")
+            //setTimeout('Genesys("command", "Launcher.show");', 1000);
+         });
+ });
     </script>
+    
   <!--    <script type="text/javascript" charset="utf-8">
           Genesys("subscribe", "Launcher.ready" , function(o){
             Genesys("command", "Launcher.show");
