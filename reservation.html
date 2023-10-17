@@ -202,11 +202,7 @@
         environment: 'euc1',
         deploymentId: 'f5a21047-52ca-4448-939a-c4fb1f6c35c6'
       });
-    </script>
-    <script type="text/javascript" charset="utf-8">
-
-
-Genesys("subscribe", "Launcher.ready" , function(o){
+        Genesys("subscribe", "Launcher.ready" , function(o){
             console.log("The queue works!");
             Genesys("command", "Launcher.show");
             //setTimeout('Genesys("command", "Launcher.show");', 1000);
