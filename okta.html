@@ -68,8 +68,10 @@
     </div>
     <!-- Navbar End -->
 
-	<button id="my-button">OKTA</button>
-	<div id="my-div">TEST</div>
+	<button id="myLoginButton">LOGIN</button>
+	<div id="divnonce"></div>
+	<div id="divauthCode"></div>
+	<div id="diviss"></div>
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 p-0 px-0 position-relative overlay-top">
@@ -140,29 +142,31 @@
 	<script src="https://global.oktacdn.com/okta-auth-js/5.2.2/okta-auth-js.min.js" type="text/javascript"></script>
 
 	<script type="text/javascript" charset="utf-8">
+
+		let sRedirectURL = window.location.href;
+		let maxAge = 600;
 		const oktaConfig = {
-			redirectUri: 'https://lex-genesys.github.io/okta.html',
-			postLogoutRedirectUri: 'https://lex-genesys.github.io/okta.html',
+			redirectUri: `${sRedirectURL}`,
+			postLogoutRedirectUri: `${sRedirectURL}`,
 			clientId: '0oagb1otcizZtkTG55d7',
 			issuer: 'https://dev-78737225.okta.com/oauth2/default',
 			scopes: ['openid', 'email', 'profile', 'offline_access'],
 			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
 			responseType: 'code',
-			maxAge : 600
+			maxAge : `${maxAge}`
 		};
 		const authClient = new OktaAuth(oktaConfig);
 		
-	   	var button = document.getElementById("my-button");
+	   	var button = document.getElementById("myLoginButton");
 
-		function changeColor() {
-  			document.getElementById("my-div").style.backgroundColor = "green";
+		function oktaLogin() {
 			authClient.signInWithRedirect({
 				originalUri: 'https://lex-genesys.github.io/okta.html',
 				...oktaConfig
 			});
 		}
 		
-		button.addEventListener("click", changeColor);
+		button.addEventListener("click", oktaLogin);
 	
 		(function (g, e, n, es, ys) {
 			g['_genesysJs'] = e;
@@ -176,6 +180,92 @@
 	    	environment: 'prod-euc1',
 	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
 		});
+
+		let oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
+
+  		if (oktaTransactionStorage) {
+  			const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
+  			const nonce = storage.split(';')[0];
+  		}
+
+  		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
+  		const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
+  		const iss = urlParams.has('iss') ? urlParams.get('iss'); // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
+
+		var nonceDiv = document.getElementById("divnonce");
+		var nonceContent = document.createTextNode(nonce);
+		nonceDiv.appendChild(nonceContent);
+
+		var authCodeDiv = document.getElementById("divauthCode");
+		var authCodeContent = document.createTextNode(authCode);
+		authCodeDiv.appendChild(authCodeContent);
+
+		var issDiv = document.getElementById("diviss");
+		var issContent = document.createTextNode(iss);
+		issDiv.appendChild(issContent);
+		
+		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
+		
+			  // COMMAND
+			  // *********
+			  // getAuthCode
+			  // reAuthenticate
+			
+			  /* Register Command - mandatory */
+			
+			  AuthProvider.registerCommand('getAuthCode', (e) => {
+			
+				// Add the necessary logic and resolve with the authCode and redirectUri provided by your Authentication provider. Messenger will call this command to get the the tokens.
+			
+				e.resolve({
+					authCode:`${authCode}`,       // pass your authorization code here
+					redirectUri: `${sRedirectURL}`,  // pass the redirection URI configured in your Authentication provider here
+					nonce: `${sRedirectURL}`,               // pass the random string preferably in uuid format. Applicable for OKTA provider.
+					maxAge: `${maxAge}`,             // pass elapsed time in seconds. Applicable for OKTA provider and it is an optional parameter.
+					iss: `${iss}`                // pass your iss here. It is an optional parameter provided in the authorization response by your Authentication provider.
+				});
+			  });
+			
+			  AuthProvider.registerCommand('reAuthenticate', (e) => {
+			    
+				// Messenger will call this command when current refreshToken and/or authCode are no more valid. Brand can add logic here to simply re-login and resolve this command after successful login so that Messenger can get the new authCode. (In case when browser needs to reload for a login, there is no need to resolve this command). Note: After a successful re-login, calling the getAuthCode command is taken care internally and there is no need to call it explicitly again.
+			
+				document.getElementById('myLoginButton').click(); // simulate the login button click
+				e.resolve();
+			  });
+			
+			  /* Subscribe to Auth plugin events */
+			
+			   AuthProvider.subscribe('Auth.loggedOut', () => {
+			     // This event is published across the browser tabs/devices where the user is logged in, so you can do something on logout.
+			 	   // For example, clear any authenticated flags that you might have set during login.
+			   });
+			
+			  /* Subscribe to Auth plugin events - optional */
+			
+			  AuthProvider.subscribe('Auth.authError', (error) => {
+			
+			    // This event is published across the browser tabs/devices where the user is logged in, so you can do something on logout.
+			    // For example, clear any authenticated flags that you might have set during login.
+			  });
+			
+			 /* Click Handlers */
+			
+			  // Handle logout
+			  document.getElementById('myButton').onclick = function () {
+			
+				    AuthProvider.command('Auth.logout').then(() => {
+				      // Do something on logout.
+					  // For example, clear any authenticated flags that you might have set on login
+				    });
+			  };
+			
+			  // Tell Messenger that your plugin is ready (mandatory)
+			  AuthProvider.ready();
+		});
+
+
+		
 	</script>
     
 	</body>
