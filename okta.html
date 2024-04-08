@@ -152,7 +152,7 @@
 	    scopes: ['openid', 'email', 'profile', 'offline_access'],
 	    pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
 	    responseType: 'code',
-	    maxAge : <MaxAge>
+	    maxAge : 600
     };
     const authClient = new OktaAuth(oktaConfig)		
 
