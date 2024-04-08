@@ -69,6 +69,7 @@
     <!-- Navbar End -->
 
 	<button id="myLoginButton">LOGIN</button>
+	<button id="mytestButton">TEST</button>
 	<div id="divnonce"></div>
 	<div id="divauthCode"></div>
 	<div id="diviss"></div>
@@ -196,15 +197,22 @@
 
 			authCode = code && code.split('&')[0];
 		}
+
+		var buttonTest = document.getElementById("mytestButton");
+
+		function verifOkta() {
+			var nonceDiv = document.getElementById("divnonce");
+			var nonceContent = document.createTextNode(nonce);
+			nonceDiv.appendChild(nonceContent);
+
+			var authCodeDiv = document.getElementById("divauthCode");
+			var authCodeContent = document.createTextNode(authCode);
+			authCodeDiv.appendChild(authCodeContent);
+		}
+
+		buttonTest.addEventListener("click", verifOkta);
 		
-		var nonceDiv = document.getElementById("divnonce");
-		var nonceContent = document.createTextNode(nonce);
-		nonceDiv.appendChild(nonceContent);
-
-		var authCodeDiv = document.getElementById("divauthCode");
-		var authCodeContent = document.createTextNode(authCode);
-		authCodeDiv.appendChild(authCodeContent);
-
+		
 		/*
 		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
 		
