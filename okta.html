@@ -154,7 +154,11 @@
 	    responseType: 'code',
 	    maxAge : 600
     };
-    const authClient = new OktaAuth(oktaConfig)		
+    const authClient = new OktaAuth(oktaConfig)
+	authClient.signInWithRedirect({
+		originalUri: https://lex-genesys.github.io/okta.html,
+		...oktaConfig
+	});
 
     
 <script type="text/javascript" charset="utf-8">
