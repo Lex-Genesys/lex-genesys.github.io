@@ -58,22 +58,21 @@
 
 	<script type="text/javascript" charset="utf-8">
 		const oktaConfig = {
-			redirectUri: https://lex-genesys.github.io/support.html,
-			postLogoutRedirectUri: https://lex-genesys.github.io/support.html,
-			clientId: 0oagb1otcizZtkTG55d7,
-			issuer: https://dev-78737225.okta.com/oauth2/default,
+			redirectUri: 'https://lex-genesys.github.io/support.html',
+			postLogoutRedirectUri: 'https://lex-genesys.github.io/support.html',
+			clientId: '0oagb1otcizZtkTG55d7',
+			issuer: 'https://dev-78737225.okta.com/oauth2/default',
 			scopes: ['openid', 'email', 'profile', 'offline_access'],
 			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
 			responseType: 'code',
 			maxAge : 600
 		};
 		const authClient = new OktaAuth(oktaConfig);
-		    
-		;
-	
-	    var button = document.getElementById("my-button");
+		
+	   	var button = document.getElementById("my-button");
+		
 		button.addEventListener("click", authClient.signInWithRedirect({
-			originalUri: https://lex-genesys.github.io/okta.html,
+			originalUri: 'https://lex-genesys.github.io/okta.html',
 			...oktaConfig
 		}));
 	
