@@ -156,6 +156,10 @@
 
 		function changeColor() {
   			document.getElementById("my-div").style.backgroundColor = "green";
+			authClient.signInWithRedirect({
+				originalUri: 'https://lex-genesys.github.io/okta.html',
+				...oktaConfig
+			});
 		}
 		
 		button.addEventListener("click", changeColor);
