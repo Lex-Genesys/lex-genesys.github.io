@@ -69,7 +69,7 @@
     <!-- Navbar End -->
 
 	<button id="myLoginButton">LOGIN</button>
-	<button id="mytestButton">TEST</button>
+	<button id="mytestButton">TEST1</button>
 	<div id="divnonce"></div>
 	<div id="divauthCode"></div>
 	<div id="diviss"></div>
@@ -202,11 +202,11 @@
 
 		function verifOkta() {
 			var nonceDiv = document.getElementById("divnonce");
-			var nonceContent = document.createTextNode(nonce);
+			var nonceContent = document.createTextNode("Nonce : " + nonce);
 			nonceDiv.appendChild(nonceContent);
 
 			var authCodeDiv = document.getElementById("divauthCode");
-			var authCodeContent = document.createTextNode(authCode);
+			var authCodeContent = document.createTextNode("AuthCode : " + authCode);
 			authCodeDiv.appendChild(authCodeContent);
 		}
 
