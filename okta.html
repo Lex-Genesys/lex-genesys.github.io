@@ -179,17 +179,17 @@
 	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
 		});
 
-		let oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
+		var oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
 
   		if (oktaTransactionStorage) {
   			const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
   			const nonce = storage.split(';')[0];
   		}
-
+/*
   		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
   		const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
   		const iss = urlParams.has('iss') ? urlParams.get('iss'); // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
-/*
+
 		var nonceDiv = document.getElementById("divnonce");
 		var nonceContent = document.createTextNode(nonce);
 		nonceDiv.appendChild(nonceContent);
