@@ -143,17 +143,15 @@
 
 	<script type="text/javascript" charset="utf-8">
 
-		let sRedirectURL = window.location.href;
-		let maxAge = 600;
 		const oktaConfig = {
-			redirectUri: `${sRedirectURL}`,
-			postLogoutRedirectUri: `${sRedirectURL}`,
+			redirectUri: 'https://lex-genesys.github.io/okta.html',
+			postLogoutRedirectUri: 'https://lex-genesys.github.io/okta.html',
 			clientId: '0oagb1otcizZtkTG55d7',
 			issuer: 'https://dev-78737225.okta.com/oauth2/default',
 			scopes: ['openid', 'email', 'profile', 'offline_access'],
 			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
 			responseType: 'code',
-			maxAge : `${maxAge}`
+			maxAge : 600
 		};
 		const authClient = new OktaAuth(oktaConfig);
 		
