@@ -70,11 +70,12 @@
 		const authClient = new OktaAuth(oktaConfig);
 		
 	   	var button = document.getElementById("my-button");
+
+		function changeColor() {
+  			document.getElementById(my-button").style.backgroundColor = "green";
+		}
 		
-		button.addEventListener("click", authClient.signInWithRedirect({
-			originalUri: 'https://lex-genesys.github.io/okta.html',
-			...oktaConfig
-		}));
+		button.addEventListener("click", changeColor);
 	
 		(function (g, e, n, es, ys) {
 			g['_genesysJs'] = e;
