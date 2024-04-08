@@ -187,7 +187,17 @@
   		}
 
   		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
-  		const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
+		let authCode = '';
+		if (urlParams.has('code')) {
+			authCode = urlParams.get('code');
+		} else {
+			const query = window.location.search.substring(1);
+			const code = query.split('code=')[1];
+
+			authCode = code && code.split('&')[0];
+		}
+		
+  		//const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
 /*
 		var nonceDiv = document.getElementById("divnonce");
 		var nonceContent = document.createTextNode(nonce);
