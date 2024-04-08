@@ -188,7 +188,6 @@
 
   		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
   		const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
-  		const iss = urlParams.has('iss') ? urlParams.get('iss'); // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
 /*
 		var nonceDiv = document.getElementById("divnonce");
 		var nonceContent = document.createTextNode(nonce);
