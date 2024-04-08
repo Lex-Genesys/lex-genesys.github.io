@@ -36,60 +36,7 @@
 </head>
 
 <body>
-	<!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lex-genesys.github.io/lib/easing/easing.min.js"></script>
-    <script src="lex-genesys.github.io/lib/waypoints/waypoints.min.js"></script>
-    <script src="lex-genesys.github.io/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lex-genesys.github.io/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lex-genesys.github.io/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lex-genesys.github.io/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="lex-genesys.github.io/mail/jqBootstrapValidation.min.js"></script>
-    <script src="lex-genesys.github.io/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="lex-genesys.github.io/js/main.js"></script>
-
-	<!-- OKTA Javascript -->
-	<script src="https://global.oktacdn.com/okta-auth-js/5.2.2/okta-auth-js.min.js" type="text/javascript"></script>
-
-	<script type="text/javascript" charset="utf-8">
-		const oktaConfig = {
-			redirectUri: 'https://lex-genesys.github.io/support.html',
-			postLogoutRedirectUri: 'https://lex-genesys.github.io/support.html',
-			clientId: '0oagb1otcizZtkTG55d7',
-			issuer: 'https://dev-78737225.okta.com/oauth2/default',
-			scopes: ['openid', 'email', 'profile', 'offline_access'],
-			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
-			responseType: 'code',
-			maxAge : 600
-		};
-		const authClient = new OktaAuth(oktaConfig);
-		
-	   	var button = document.getElementById("my-button");
-
-		function changeColor() {
-  			document.getElementById(my-button").style.backgroundColor = "green";
-		}
-		
-		button.addEventListener("click", changeColor);
 	
-		(function (g, e, n, es, ys) {
-			g['_genesysJs'] = e;
-			g[e] = g[e] || function () {
-				(g[e].q = g[e].q || []).push(arguments)
-			};
-			g[e].t = 1 * new Date();
-			g[e].c = es;
-			ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-		})(window, 'Genesys', 'https://apps.mypurecloud.de/genesys-bootstrap/genesys.min.js', {
-	    	environment: 'prod-euc1',
-	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
-		});
-	</script>
 	
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
@@ -122,6 +69,7 @@
     <!-- Navbar End -->
 
 	<button id="my-button">OKTA</button>
+	<div id="my-div"></div>
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 p-0 px-0 position-relative overlay-top">
@@ -171,6 +119,60 @@
     </div>
     <!-- Footer End -->
 
+	<!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lex-genesys.github.io/lib/easing/easing.min.js"></script>
+    <script src="lex-genesys.github.io/lib/waypoints/waypoints.min.js"></script>
+    <script src="lex-genesys.github.io/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lex-genesys.github.io/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lex-genesys.github.io/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lex-genesys.github.io/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="lex-genesys.github.io/mail/jqBootstrapValidation.min.js"></script>
+    <script src="lex-genesys.github.io/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="lex-genesys.github.io/js/main.js"></script>
+
+	<!-- OKTA Javascript -->
+	<script src="https://global.oktacdn.com/okta-auth-js/5.2.2/okta-auth-js.min.js" type="text/javascript"></script>
+
+	<script type="text/javascript" charset="utf-8">
+		const oktaConfig = {
+			redirectUri: 'https://lex-genesys.github.io/support.html',
+			postLogoutRedirectUri: 'https://lex-genesys.github.io/support.html',
+			clientId: '0oagb1otcizZtkTG55d7',
+			issuer: 'https://dev-78737225.okta.com/oauth2/default',
+			scopes: ['openid', 'email', 'profile', 'offline_access'],
+			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
+			responseType: 'code',
+			maxAge : 600
+		};
+		const authClient = new OktaAuth(oktaConfig);
+		
+	   	var button = document.getElementById("my-button");
+
+		function changeColor() {
+  			document.getElementById("my-div").style.backgroundColor = "green";
+		}
+		
+		button.addEventListener("click", changeColor);
+	
+		(function (g, e, n, es, ys) {
+			g['_genesysJs'] = e;
+			g[e] = g[e] || function () {
+				(g[e].q = g[e].q || []).push(arguments)
+			};
+			g[e].t = 1 * new Date();
+			g[e].c = es;
+			ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+		})(window, 'Genesys', 'https://apps.mypurecloud.de/genesys-bootstrap/genesys.min.js', {
+	    	environment: 'prod-euc1',
+	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
+		});
+	</script>
     
 	</body>
 </html>
