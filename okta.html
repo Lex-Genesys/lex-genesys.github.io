@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 005</h1>
+	<h1>VERSION 006</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -144,7 +144,8 @@
 
 		let sRedirectURL = window.location.href;
 		let sOktaurl = 'https://dev-78737225.okta.com/oauth2/default';
-		const oktaClientId = 0oagb1otcizZtkTG55d7;
+		const oktaClientId = '0oagb1otcizZtkTG55d7';
+		
 		console.log("sRedirectURL : " + sRedirectURL);
 
 		if (sRedirectURL && sRedirectURL.indexOf('?code') !== -1) { /**split the redirect url from the authorized okta response and pass it to the getAuthcode command */
