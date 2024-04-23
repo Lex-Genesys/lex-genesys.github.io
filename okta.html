@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 001</h1>
+	<h1>VERSION 002</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -140,6 +140,10 @@
 
 	<script type="text/javascript" charset="utf-8">
 
+		<!-- Connexion OKTA -->
+
+		let sRedirectURL = window.location.href;
+		console.log("sRedirectURL" + sRedirectURL);
 		const oktaConfig = {
 			redirectUri: 'https://lex-genesys.github.io/okta.html',
 			postLogoutRedirectUri: 'https://lex-genesys.github.io/okta.html',
@@ -162,7 +166,8 @@
 		}
 		
 		button.addEventListener("click", oktaLogin);
-	
+
+		<!-- Snippet messenger -->
 		(function (g, e, n, es, ys) {
 			g['_genesysJs'] = e;
 			g[e] = g[e] || function () {
@@ -176,34 +181,15 @@
 	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
 		});
 
-		var oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
+		if (Genesys) {
 
-		console.log("oktaTransactionStorage : " + oktaTransactionStorage);
+			let sOktaTransactionStorage = window.sessionStorage.getItem("okta-transaction-storage"), // eslint-disable-line
+				verifier = '',
+				sNonce = ''; // eslint-disable-line
 
-  		if (oktaTransactionStorage) {
-  			const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
-			console.log("storage : " + storage);
-  			const nonce = storage.split(';')[0];
-			console.log("nonce : " + nonce);
-  		}
-		
-
-  		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
-		console.log("urlParams : " + urlParams);
-		let authCode = '';
-		if (urlParams.has('code')) {
-			authCode = urlParams.get('code');
-			console.log("authCode : " + authCode);
-		} else {
-			const query = window.location.search.substring(1);
-			console.log("query : " + query);
-			const code = query.split('code=')[1];
-			console.log("code : " + code);
-
-			authCode = code && code.split('&')[0];
-			console.log("authCode : " + authCode);
+			
+			
 		}
-
 		
 		/*
 		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
