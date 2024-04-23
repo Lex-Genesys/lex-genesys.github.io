@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 002</h1>
+	<h1>VERSION 003</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -143,9 +143,19 @@
 		<!-- Connexion OKTA -->
 
 		let sRedirectURL = window.location.href;
-		console.log("sRedirectURL" + sRedirectURL);
+		console.log("sRedirectURL : " + sRedirectURL);
+
+		if (sRedirectURL && sRedirectURL.indexOf('?code') !== -1) { /**split the redirect url from the authorized okta response and pass it to the getAuthcode command */
+			bAlreadyAuthorized = true;
+			const aPath = sRedirectURL.split('?code');
+
+			sRedirectURL = aPath && aPath.length && aPath[0];
+		}
+
+		console.log("sRedirectURL : " + sRedirectURL);
+		
 		const oktaConfig = {
-			redirectUri: 'https://lex-genesys.github.io/okta.html',
+			redirectUri: `${sRedirectURL}`,
 			postLogoutRedirectUri: 'https://lex-genesys.github.io/okta.html',
 			clientId: '0oagb1otcizZtkTG55d7',
 			issuer: 'https://dev-78737225.okta.com/oauth2/default',
