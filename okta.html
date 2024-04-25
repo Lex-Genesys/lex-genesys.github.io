@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 001</h1>
+	<h1>VERSION 002</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -201,7 +201,20 @@
 				sNonce = ''; // eslint-disable-line
 
 			console.log("sOktaTransactionStorage : " + sOktaTransactionStorage);
-			
+
+			if (sOktaTransactionStorage) {
+				const oStorage = JSON.parse(sOktaTransactionStorage);
+
+				if (oStorage && Object.keys(oStorage).length) {
+					const { codeVerifier, nonce } = oStorage || {};
+
+					verifier = codeVerifier || '';
+					sNonce = nonce || '';
+
+					console.log("verifier : " + verifier);
+					console.log("sNonce : " + nonce);
+				}
+			}
 		}
 		
 		/*
