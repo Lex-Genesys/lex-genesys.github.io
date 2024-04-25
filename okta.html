@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 002</h1>
+	<h1>VERSION 003</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -197,7 +197,6 @@
 		if (Genesys) {
 
 			let sOktaTransactionStorage = window.sessionStorage.getItem("okta-transaction-storage"), // eslint-disable-line
-				verifier = '',
 				sNonce = ''; // eslint-disable-line
 
 			console.log("sOktaTransactionStorage : " + sOktaTransactionStorage);
@@ -208,13 +207,16 @@
 				if (oStorage && Object.keys(oStorage).length) {
 					const { codeVerifier, nonce } = oStorage || {};
 
-					verifier = codeVerifier || '';
 					sNonce = nonce || '';
 
-					console.log("verifier : " + verifier);
 					console.log("sNonce : " + nonce);
 				}
 			}
+
+			const QueryString = window.location.search;
+			console.log("QueryString : " + QueryString);
+			const urlParams = new URLSearchParams(QueryString);
+			console.log("urlParams : " + urlParams);
 		}
 		
 		/*
