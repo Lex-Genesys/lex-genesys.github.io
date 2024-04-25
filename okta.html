@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 000</h1>
+	<h1>VERSION 001</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -160,8 +160,8 @@
 		const oktaConfig = {
 			redirectUri: `${sRedirectURL}`,
 			postLogoutRedirectUri: `${sRedirectURL}`,
-			clientId: '0oagb1otcizZtkTG55d7',
-			issuer: oktaClientId,
+			clientId: oktaClientId,
+			issuer: `${sOktaurl}`,
 			scopes: ['openid', 'email', 'profile', 'offline_access'],
 			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
 			responseType: 'code',
