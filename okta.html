@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 007</h1>
+	<h1>VERSION 009</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -147,6 +147,9 @@
 		let sOktaurl = 'https://dev-78737225.okta.com/oauth2/default';
 		const oktaClientId = '0oagb1otcizZtkTG55d7';
 		let bAuthenticated = false;
+		let nonce  = '';
+		let authCode  = '';
+		
 		
 		console.log("sRedirectURL : " + sRedirectURL);
 
@@ -205,16 +208,15 @@
   			if (oktaTransactionStorage) {
   				const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
 				console.log("storage : " + storage);
-  				const nonce = storage.split(';')[0];
+  				nonce = storage.split(';')[0];
 				console.log("nonce : " + nonce);
   			}
 
   			const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
 			console.log("urlParams : " + urlParams);
-  			const authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
+  			authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
 			console.log("authCode : " + authCode);
-  			const iss = urlParams.has('iss') ? urlParams.get('iss')  : ''; // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
-			console.log("iss : " + iss);
+  			
 
 			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
 				// COMMANDS
