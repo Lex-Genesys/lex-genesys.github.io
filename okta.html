@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 004</h1>
+	<h1>VERSION 005</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -196,40 +196,23 @@
 
 		if (Genesys) {
 
-			let sOktaTransactionStorage = window.sessionStorage.getItem("okta-transaction-storage"), // eslint-disable-line
-				sNonce = ''; // eslint-disable-line
+			let oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
 
-			console.log("sOktaTransactionStorage : " + sOktaTransactionStorage);
+			console.log("oktaTransactionStorage : " + oktaTransactionStorage);
 
-			if (sOktaTransactionStorage) {
-				const oStorage = JSON.parse(sOktaTransactionStorage);
+  			if (oktaTransactionStorage) {
+  				const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
+				console.log("storage : " + storage);
+  				const nonce = storage.split(';')[0];
+				console.log("nonce : " + nonce);
+  			}
 
-				if (oStorage && Object.keys(oStorage).length) {
-					const { codeVerifier, nonce } = oStorage || {};
-
-					sNonce = nonce || '';
-
-					console.log("sNonce : " + nonce);
-				}
-			}
-
-			const QueryString = window.location.search;
-			console.log("QueryString : " + QueryString);
-			const urlParams = new URLSearchParams(QueryString);
+  			const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
 			console.log("urlParams : " + urlParams);
-
-			if (urlParams.has('code')) {
-				brandAuthCode = urlParams.get('code');
-				console.log("brandAuthCode : " + brandAuthCode);
-				
-			} else {
-				const query = window.location.search.substring(1);
-				console.log("query : " + query);
-				const code = query.split('code=')[1];
-				console.log("code : " + code);
-				brandAuthCode = code && code.split('&')[0];
-				console.log("brandAuthCode : " + brandAuthCode);
-			}
+  			const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
+			console.log("authCode : " + authCode);
+  			const iss = urlParams.has('iss') ? urlParams.get('iss'); // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
+			console.log("iss : " + iss);
 		}
 		
 		/*
