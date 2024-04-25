@@ -209,9 +209,9 @@
 
   			const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
 			console.log("urlParams : " + urlParams);
-  			const authCode = urlParams.has('code') ? urlParams.get('code'); // Get code from the query string
+  			const authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
 			console.log("authCode : " + authCode);
-  			const iss = urlParams.has('iss') ? urlParams.get('iss'); // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
+  			const iss = urlParams.has('iss') ? urlParams.get('iss')  : ''; // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
 			console.log("iss : " + iss);
 		}
 		
