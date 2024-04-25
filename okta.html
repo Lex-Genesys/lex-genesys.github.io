@@ -67,7 +67,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 003</h1>
+	<h1>VERSION 004</h1>
 	<button id="myLoginButton">LOGIN</button>
 
     <!-- Footer Start -->
@@ -217,6 +217,19 @@
 			console.log("QueryString : " + QueryString);
 			const urlParams = new URLSearchParams(QueryString);
 			console.log("urlParams : " + urlParams);
+
+			if (urlParams.has('code')) {
+				brandAuthCode = urlParams.get('code');
+				console.log("brandAuthCode : " + brandAuthCode);
+				
+			} else {
+				const query = window.location.search.substring(1);
+				console.log("query : " + query);
+				const code = query.split('code=')[1];
+				console.log("code : " + code);
+				brandAuthCode = code && code.split('&')[0];
+				console.log("brandAuthCode : " + brandAuthCode);
+			}
 		}
 		
 		/*
