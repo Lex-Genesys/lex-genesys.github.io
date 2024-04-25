@@ -67,8 +67,9 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 005</h1>
+	<h1>VERSION 007</h1>
 	<button id="myLoginButton">LOGIN</button>
+	<button id="myLogoutButton">LOGOUT</button>
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 p-0 px-0 position-relative overlay-top">
@@ -145,6 +146,7 @@
 		let sRedirectURL = window.location.href;
 		let sOktaurl = 'https://dev-78737225.okta.com/oauth2/default';
 		const oktaClientId = '0oagb1otcizZtkTG55d7';
+		let bAuthenticated = false;
 		
 		console.log("sRedirectURL : " + sRedirectURL);
 
@@ -164,12 +166,12 @@
 			issuer: `${sOktaurl}`,
 			scopes: ['openid', 'email', 'profile', 'offline_access'],
 			pkce: false, // default is true. Set to 'false' in case of implcit/authorization code flow
-			responseType: 'code',
-			maxAge : 600
+			responseType: 'code'
 		};
 		const authClient = new OktaAuth(oktaConfig);
 		
-	   	var button = document.getElementById("myLoginButton");
+	   	var buttonLogin = document.getElementById("myLoginButton");
+		var buttonLogout = document.getElementById("myLogoutButton");
 
 		function oktaLogin() {
 			authClient.signInWithRedirect({
@@ -178,7 +180,7 @@
 			});
 		}
 		
-		button.addEventListener("click", oktaLogin);
+		buttonLogin.addEventListener("click", oktaLogin);
 
 		<!-- Snippet messenger -->
 		(function (g, e, n, es, ys) {
@@ -213,68 +215,79 @@
 			console.log("authCode : " + authCode);
   			const iss = urlParams.has('iss') ? urlParams.get('iss')  : ''; // Get optional iss parameter from the query string. urlParams will decode this issuer URL if it is encoded.
 			console.log("iss : " + iss);
+
+			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
+				// COMMANDS
+
+				// getAuthCode
+				// getTokens
+				// setTokens
+
+				/* Register Commands */
+
+				AuthProvider.registerCommand('getAuthCode', (e) => {
+					const { forceUpdate } = e.data || {};
+					if (forceUpdate) {
+						buttonLogin.click(); // simulate the login click.
+						e.resolve();
+					} else {
+						const sData = {
+							authCode: authCode,
+							redirectUri: `${sRedirectURL}`,
+							nonce: nonce,
+						};
+
+						e.resolve(sData);
+					}
+				});
+
+				AuthProvider.registerCommand('reAuthenticate', (e) => {
+					// Brand can handle this how ever they want.
+					// This command will be called when current refreshToken and/or authCode are no more valid. User needs to re-login here to provide us new authCode and/or refreshToken.
+					buttonLogin.click(); // simulate the login click.
+					e.resolve();
+				});
+
+				AuthProvider.subscribe('Auth.ready', () => {
+
+				});
+
+				AuthProvider.subscribe('Auth.authenticated', () => {
+
+				});
+
+				AuthProvider.subscribe('Auth.error', (error) => {
+					const { message } = error.data || {};
+
+					// 'message' here is provided by our API and its always expected to be in string. Any security scan results are false postive in this case.
+					console.log("Auth Error", message);
+
+				});
+
+				AuthProvider.subscribe('Auth.authError', (error) => {
+
+					console.log("Auth Error", error);
+
+				});
+
+				/* Handlers */
+
+				buttonLogout.onclick = function () {
+					AuthProvider.command('Auth.logout')
+						.finally(() => {
+							if (authClient) authClient.signOut();
+						});
+				};
+
+				// Tell CXBus your plugin is ready (mandatory)
+				AuthProvider.ready();
+			});
+		
+
+			
 		}
 		
-		/*
-		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
 		
-			  // COMMAND
-			  // *********
-			  // getAuthCode
-			  // reAuthenticate
-			
-			 
-			
-			  AuthProvider.registerCommand('getAuthCode', (e) => {
-			
-				// Add the necessary logic and resolve with the authCode and redirectUri provided by your Authentication provider. Messenger will call this command to get the the tokens.
-			
-				e.resolve({
-					authCode:`${authCode}`,       // pass your authorization code here
-					redirectUri: `${sRedirectURL}`,  // pass the redirection URI configured in your Authentication provider here
-					nonce: `${sRedirectURL}`,               // pass the random string preferably in uuid format. Applicable for OKTA provider.
-					maxAge: `${maxAge}`,             // pass elapsed time in seconds. Applicable for OKTA provider and it is an optional parameter.
-					iss: `${iss}`                // pass your iss here. It is an optional parameter provided in the authorization response by your Authentication provider.
-				});
-			  });
-			
-			  AuthProvider.registerCommand('reAuthenticate', (e) => {
-			    
-				// Messenger will call this command when current refreshToken and/or authCode are no more valid. Brand can add logic here to simply re-login and resolve this command after successful login so that Messenger can get the new authCode. (In case when browser needs to reload for a login, there is no need to resolve this command). Note: After a successful re-login, calling the getAuthCode command is taken care internally and there is no need to call it explicitly again.
-			
-				document.getElementById('myLoginButton').click(); // simulate the login button click
-				e.resolve();
-			  });
-			
-			  
-			
-			   AuthProvider.subscribe('Auth.loggedOut', () => {
-			     // This event is published across the browser tabs/devices where the user is logged in, so you can do something on logout.
-			 	   // For example, clear any authenticated flags that you might have set during login.
-			   });
-			
-			  
-			
-			  AuthProvider.subscribe('Auth.authError', (error) => {
-			
-			    // This event is published across the browser tabs/devices where the user is logged in, so you can do something on logout.
-			    // For example, clear any authenticated flags that you might have set during login.
-			  });
-			
-			 
-			
-			  // Handle logout
-			  document.getElementById('myButton').onclick = function () {
-			
-				    AuthProvider.command('Auth.logout').then(() => {
-				      // Do something on logout.
-					  // For example, clear any authenticated flags that you might have set on login
-				    });
-			  };
-			
-			  // Tell Messenger that your plugin is ready (mandatory)
-			  AuthProvider.ready();
-		});*/
 
 
 		
