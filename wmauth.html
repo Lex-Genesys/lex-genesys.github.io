@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 004</h1>
+	<h1>VERSION 001</h1>
 	
 
     <!-- Footer Start -->
@@ -157,11 +157,13 @@
 
 		let authCode  = '';
 		let sRedirectURL  = '';
+		let nonce  = '';
 
 		authCode = localStorage.getItem('authCode');
 		console.log("authCode" + authCode);
 		sRedirectURL = localStorage.getItem('sRedirectURL');
 		console.log("sRedirectURL" + authCode);
+		nonce = localStorage.getItem('nonce');
 		
 		if (Genesys) {
 			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
