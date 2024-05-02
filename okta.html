@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 002</h1>
+	<h1>VERSION 003</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -217,74 +217,78 @@
 		console.log("urlParams : " + urlParams);
 		authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
 		console.log("authCode : " + authCode);
+
+		localStorage.setItem('authCode', sClientId);
+		localStorage.setItem('sRedirectURL', `${sRedirectURL}`);
+		/*
+		if (Genesys) {
+			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
+				// COMMANDS
 		
-
-		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
-			// COMMANDS
-
-			// getAuthCode
-			// getTokens
-			// setTokens
-
-			/* Register Commands */
-
-			AuthProvider.registerCommand('getAuthCode', (e) => {
-				const { forceUpdate } = e.data || {};
-				if (forceUpdate) {
+				// getAuthCode
+				// getTokens
+				// setTokens
+		
+				
+		
+				AuthProvider.registerCommand('getAuthCode', (e) => {
+					const { forceUpdate } = e.data || {};
+					if (forceUpdate) {
+						buttonLogin.click(); // simulate the login click.
+						e.resolve();
+					} else {
+						const sData = {
+							authCode: authCode,
+							redirectUri: `${sRedirectURL}`,
+							nonce: nonce,
+						};
+		
+						e.resolve(sData);
+					}
+				});
+		
+				AuthProvider.registerCommand('reAuthenticate', (e) => {
+					// Brand can handle this how ever they want.
+					// This command will be called when current refreshToken and/or authCode are no more valid. User needs to re-login here to provide us new authCode and/or refreshToken.
 					buttonLogin.click(); // simulate the login click.
 					e.resolve();
-				} else {
-					const sData = {
-						authCode: authCode,
-						redirectUri: `${sRedirectURL}`,
-						nonce: nonce,
-					};
-
-					e.resolve(sData);
-				}
+				});
+		
+				AuthProvider.subscribe('Auth.ready', () => {
+		
+				});
+		
+				AuthProvider.subscribe('Auth.authenticated', () => {
+		
+				});
+		
+				AuthProvider.subscribe('Auth.error', (error) => {
+					const { message } = error.data || {};
+		
+					// 'message' here is provided by our API and its always expected to be in string. Any security scan results are false postive in this case.
+					console.log("Auth Error", message);
+		
+				});
+		
+				AuthProvider.subscribe('Auth.authError', (error) => {
+		
+					console.log("Auth Error", error);
+		
+				});
+		
+				
+		
+				buttonLogout.onclick = function () {
+					AuthProvider.command('Auth.logout')
+						.finally(() => {
+							if (authClient) authClient.signOut();
+						});
+				};
+		
+				// Tell CXBus your plugin is ready (mandatory)
+				AuthProvider.ready();
 			});
-
-			AuthProvider.registerCommand('reAuthenticate', (e) => {
-				// Brand can handle this how ever they want.
-				// This command will be called when current refreshToken and/or authCode are no more valid. User needs to re-login here to provide us new authCode and/or refreshToken.
-				buttonLogin.click(); // simulate the login click.
-				e.resolve();
-			});
-
-			AuthProvider.subscribe('Auth.ready', () => {
-
-			});
-
-			AuthProvider.subscribe('Auth.authenticated', () => {
-
-			});
-
-			AuthProvider.subscribe('Auth.error', (error) => {
-				const { message } = error.data || {};
-
-				// 'message' here is provided by our API and its always expected to be in string. Any security scan results are false postive in this case.
-				console.log("Auth Error", message);
-
-			});
-
-			AuthProvider.subscribe('Auth.authError', (error) => {
-
-				console.log("Auth Error", error);
-
-			});
-
-			/* Handlers */
-
-			buttonLogout.onclick = function () {
-				AuthProvider.command('Auth.logout')
-					.finally(() => {
-						if (authClient) authClient.signOut();
-					});
-			};
-
-			// Tell CXBus your plugin is ready (mandatory)
-			AuthProvider.ready();
-		});
+		}*/
 	</script>
     
 	</body>
