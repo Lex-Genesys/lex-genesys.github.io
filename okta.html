@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 003</h1>
+	<h1>VERSION 005</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -218,8 +218,10 @@
 		authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
 		console.log("authCode : " + authCode);
 
-		localStorage.setItem('authCode', sClientId);
-		localStorage.setItem('sRedirectURL', `${sRedirectURL}`);
+		if (authCode) {
+			localStorage.setItem('authCode', authCode);
+			localStorage.setItem('sRedirectURL', `${sRedirectURL}`);
+		}
 		/*
 		if (Genesys) {
 			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
