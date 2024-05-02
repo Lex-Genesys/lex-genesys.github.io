@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 011</h1>
+	<h1>VERSION 021</h1>
 	
 
     <!-- Footer Start -->
@@ -177,19 +177,13 @@
 				
 		
 				AuthProvider.registerCommand('getAuthCode', (e) => {
-					const { forceUpdate } = e.data || {};
-					if (forceUpdate) {
-						buttonLogin.click(); // simulate the login click.
-						e.resolve();
-					} else {
-						const sData = {
-							authCode: authCode,
-							redirectUri: `${sRedirectURL}`,
-							nonce: nonce,
-						};
-		
-						e.resolve(sData);
-					}
+					const sData = {
+						authCode: authCode,
+						redirectUri: `${sRedirectURL}`,
+						nonce: nonce,
+					};
+	
+					e.resolve(sData);
 				});
 		
 				AuthProvider.registerCommand('reAuthenticate', (e) => {
