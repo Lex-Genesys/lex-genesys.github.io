@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 002</h1>
+	<h1>VERSION 003</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -188,6 +188,9 @@
 
 		buttonLogout.onclick = function () {
 			if (authClient) authClient.signOut();
+			localStorage.removeItem('authCode');
+			localStorage.removeItem('sRedirectURL');
+			localStorage.removeItem('nonce');
 		};
 
 		/* SNIPPET GENESYS
