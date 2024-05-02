@@ -218,14 +218,11 @@
 		
 				});
 		
+				AuthProvider.command('Auth.logout')
+					.finally(() => {
+						if (authClient) authClient.signOut();
+					});
 				
-		
-				buttonLogout.onclick = function () {
-					AuthProvider.command('Auth.logout')
-						.finally(() => {
-							if (authClient) authClient.signOut();
-						});
-				};
 		
 				// Tell CXBus your plugin is ready (mandatory)
 				AuthProvider.ready();
