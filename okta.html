@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 001</h1>
+	<h1>VERSION 002</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -200,100 +200,91 @@
 	    	deploymentId: '0a53718a-4811-4396-9fed-a0acd89d2fa0'
 		});*/
 
-		if (Genesys) {
+		
 
-			let oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
+		let oktaTransactionStorage = window.document.cookie.toString(); // Get nonce from cookie
 
-			console.log("oktaTransactionStorage : " + oktaTransactionStorage);
+		console.log("oktaTransactionStorage : " + oktaTransactionStorage);
 
-  			if (oktaTransactionStorage) {
-  				const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
-				console.log("storage : " + storage);
-  				nonce = storage.split(';')[0];
-				console.log("nonce : " + nonce);
-  			}
+		if (oktaTransactionStorage) {
+			const storage = oktaTransactionStorage.split('okta-oauth-nonce=')[1]; // Extract 'okta-oauth-nonce' cookie from 'oktaTransactionStorage'
+			console.log("storage : " + storage);
+			nonce = storage.split(';')[0];
+			console.log("nonce : " + nonce);
+		}
 
-  			const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
-			console.log("urlParams : " + urlParams);
-  			authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
-			console.log("authCode : " + authCode);
-  			
+		const urlParams = new URLSearchParams(window.location.search); // Get the authorization response which is added as a query string from the redirect URL
+		console.log("urlParams : " + urlParams);
+		authCode = urlParams.has('code') ? urlParams.get('code') : ''; // Get code from the query string
+		console.log("authCode : " + authCode);
+		
 
-			Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
-				// COMMANDS
+		Genesys('registerPlugin', 'AuthProvider', (AuthProvider) => {
+			// COMMANDS
 
-				// getAuthCode
-				// getTokens
-				// setTokens
+			// getAuthCode
+			// getTokens
+			// setTokens
 
-				/* Register Commands */
+			/* Register Commands */
 
-				AuthProvider.registerCommand('getAuthCode', (e) => {
-					const { forceUpdate } = e.data || {};
-					if (forceUpdate) {
-						buttonLogin.click(); // simulate the login click.
-						e.resolve();
-					} else {
-						const sData = {
-							authCode: authCode,
-							redirectUri: `${sRedirectURL}`,
-							nonce: nonce,
-						};
-
-						e.resolve(sData);
-					}
-				});
-
-				AuthProvider.registerCommand('reAuthenticate', (e) => {
-					// Brand can handle this how ever they want.
-					// This command will be called when current refreshToken and/or authCode are no more valid. User needs to re-login here to provide us new authCode and/or refreshToken.
+			AuthProvider.registerCommand('getAuthCode', (e) => {
+				const { forceUpdate } = e.data || {};
+				if (forceUpdate) {
 					buttonLogin.click(); // simulate the login click.
 					e.resolve();
-				});
+				} else {
+					const sData = {
+						authCode: authCode,
+						redirectUri: `${sRedirectURL}`,
+						nonce: nonce,
+					};
 
-				AuthProvider.subscribe('Auth.ready', () => {
-
-				});
-
-				AuthProvider.subscribe('Auth.authenticated', () => {
-
-				});
-
-				AuthProvider.subscribe('Auth.error', (error) => {
-					const { message } = error.data || {};
-
-					// 'message' here is provided by our API and its always expected to be in string. Any security scan results are false postive in this case.
-					console.log("Auth Error", message);
-
-				});
-
-				AuthProvider.subscribe('Auth.authError', (error) => {
-
-					console.log("Auth Error", error);
-
-				});
-
-				/* Handlers */
-
-				buttonLogout.onclick = function () {
-					AuthProvider.command('Auth.logout')
-						.finally(() => {
-							if (authClient) authClient.signOut();
-						});
-				};
-
-				// Tell CXBus your plugin is ready (mandatory)
-				AuthProvider.ready();
+					e.resolve(sData);
+				}
 			});
-		
 
-			
-		}
-		
-		
+			AuthProvider.registerCommand('reAuthenticate', (e) => {
+				// Brand can handle this how ever they want.
+				// This command will be called when current refreshToken and/or authCode are no more valid. User needs to re-login here to provide us new authCode and/or refreshToken.
+				buttonLogin.click(); // simulate the login click.
+				e.resolve();
+			});
 
+			AuthProvider.subscribe('Auth.ready', () => {
 
-		
+			});
+
+			AuthProvider.subscribe('Auth.authenticated', () => {
+
+			});
+
+			AuthProvider.subscribe('Auth.error', (error) => {
+				const { message } = error.data || {};
+
+				// 'message' here is provided by our API and its always expected to be in string. Any security scan results are false postive in this case.
+				console.log("Auth Error", message);
+
+			});
+
+			AuthProvider.subscribe('Auth.authError', (error) => {
+
+				console.log("Auth Error", error);
+
+			});
+
+			/* Handlers */
+
+			buttonLogout.onclick = function () {
+				AuthProvider.command('Auth.logout')
+					.finally(() => {
+						if (authClient) authClient.signOut();
+					});
+			};
+
+			// Tell CXBus your plugin is ready (mandatory)
+			AuthProvider.ready();
+		});
 	</script>
     
 	</body>
