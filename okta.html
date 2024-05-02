@@ -68,7 +68,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 005</h1>
+	<h1>VERSION 001</h1>
 	<button id="myLoginButton">LOGIN</button>
 	<button id="myLogoutButton">LOGOUT</button>
 
@@ -221,6 +221,7 @@
 		if (authCode) {
 			localStorage.setItem('authCode', authCode);
 			localStorage.setItem('sRedirectURL', `${sRedirectURL}`);
+			localStorage.setItem('nonce', nonce);
 		}
 		/*
 		if (Genesys) {
