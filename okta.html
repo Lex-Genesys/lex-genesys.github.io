@@ -68,9 +68,9 @@
         </nav>
     </div>
     <!-- Navbar End -->
-	<h1>VERSION 011</h1>
+	<h1>VERSION 002</h1>
 	<button id="myLoginButton">LOGIN</button>
-	<!-- button id="myLogoutButton">LOGOUT</button -->
+	<button id="myLogoutButton">LOGOUT</button>
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 p-0 px-0 position-relative overlay-top">
@@ -175,7 +175,7 @@
 		const authClient = new OktaAuth(oktaConfig);
 		
 	   	var buttonLogin = document.getElementById("myLoginButton");
-		//var buttonLogout = document.getElementById("myLogoutButton");
+		var buttonLogout = document.getElementById("myLogoutButton");
 
 		function oktaLogin() {
 			authClient.signInWithRedirect({
@@ -185,6 +185,10 @@
 		}
 		
 		buttonLogin.addEventListener("click", oktaLogin);
+
+		buttonLogout.onclick = function () {
+			if (authClient) authClient.signOut();
+		};
 
 		/* SNIPPET GENESYS
 		(function (g, e, n, es, ys) {
