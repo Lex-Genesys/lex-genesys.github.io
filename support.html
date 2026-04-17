@@ -85,6 +85,23 @@
     <!-- Navbar End -->
 
     <div class="container-fluid p-0">
+        <button type="button" id="custom-launcher" onclick="toggleMessenger()">
+          Messenger
+        </button>
+    </div>
+
+    <script type="text/javascript">
+      function toggleMessenger(){
+        Genesys("command", "Messenger.open", {},
+          function(o){},  // if resolved
+          function(o){    // if rejected
+            Genesys("command", "Messenger.close");
+          }
+        );
+      }
+    </script>
+
+    <div class="container-fluid p-0">
         <div id="genesys-support-center"></div>
     </div>
 
